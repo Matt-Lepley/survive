@@ -1,6 +1,6 @@
-#### Speed creation
+## Survive
 
-##Survive
+#### (Speed creation - 8 hours)
 
 - [x] WINDOW
 - [x] GAME LOOP
