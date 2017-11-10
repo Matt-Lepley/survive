@@ -6,7 +6,7 @@
 - [x] GAME LOOP
 - [x] INPUT
 - [x] PLAYER
-- [ ] SHOOTING
+- [x] SHOOTING
 - [ ] ENEMIES
 - [ ] GAME STATES
 - [ ] MENUS
