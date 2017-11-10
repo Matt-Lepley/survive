@@ -1,0 +1,61 @@
+#include "game.h"
+
+void Game::init() {
+  graphics.init();
+  player.init();
+}
+
+void Game::capFrames() {
+	CURRENT_TIME = SDL_GetTicks();
+	ELAPSED_TIME = CURRENT_TIME - LAST_UPDATE;
+
+	if (ELAPSED_TIME < MAX_FRAME_TIME) {
+		SDL_Delay(MAX_FRAME_TIME - ELAPSED_TIME);
+	}
+}
+
+void Game::handleEvents() {
+	const Uint8* keyState = SDL_GetKeyboardState(NULL);
+
+	while(SDL_PollEvent(&event) != 0) {
+
+		// Exit game loop
+		if(event.type == SDL_QUIT || keyState[SDL_SCANCODE_ESCAPE]) {
+			gameIsRunning = false;
+		}
+
+		// Mouse events
+		if(event.type == SDL_MOUSEBUTTONDOWN) {
+			if(event.button.button == SDL_BUTTON_LEFT) {
+
+				cout << "CLICKED" << endl;
+			}
+		}
+	}
+}
+
+void Game::gameloop() {
+
+  graphics.clear();
+
+  handleEvents();
+
+  // Cap framerate before any rendering
+  capFrames();
+
+  player.update();
+  player.draw(graphics);
+
+  SDL_RenderPresent(graphics.getRenderer());
+
+  // Update for framerate capping
+  LAST_UPDATE = CURRENT_TIME;
+}
+
+bool Game::isRunning() {
+  return gameIsRunning;
+}
+
+void Game::clean() {
+  graphics.clean();
+}
