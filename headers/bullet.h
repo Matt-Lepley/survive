@@ -8,12 +8,11 @@ class Bullet {
 
 public:
   void init(int x, int y);
-  void move();
   void update();
   void draw(Graphics &graphics);
 
 private:
-  int x, y, width, height, speed;
+  int xPos, yPos, width, height, speed;
   SDL_Rect bulletRect;
 };
 

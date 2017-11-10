@@ -1,8 +1,10 @@
 #include "game.h"
 
 void Game::init() {
+  cout << "initializing game.." << endl;
   graphics.init();
-  player.init();
+  player.init(graphics);
+  cout << "done initializing game!" << endl;
 }
 
 void Game::capFrames() {
@@ -27,8 +29,14 @@ void Game::handleEvents() {
 		// Mouse events
 		if(event.type == SDL_MOUSEBUTTONDOWN) {
 			if(event.button.button == SDL_BUTTON_LEFT) {
-
-				cout << "CLICKED" << endl;
+        // Get mouse x and mouse y
+        // Get player x and player y
+        // Find horizontal distance between
+        // Find vertical distance between
+        // Calculate angle
+        player.setMouseX(event.button.x);
+        player.setMouseY(event.button.y);
+        player.shoot();
 			}
 		}
 	}
@@ -57,5 +65,6 @@ bool Game::isRunning() {
 }
 
 void Game::clean() {
+  player.clean();
   graphics.clean();
 }

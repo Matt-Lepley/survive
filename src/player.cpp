@@ -1,58 +1,79 @@
 #include "player.h"
-#include "globals.h"
 
-void Player::init() {
-  x = (SCREEN_WIDTH / 2) - (width / 2);
-  y = (SCREEN_HEIGHT / 2) - (height / 2);
+void Player::init(Graphics &graphics) {
+  cout << "initializing player.." << endl;
+  xPos = (SCREEN_WIDTH / 2) - (width / 2);
+  yPos = (SCREEN_HEIGHT / 2) - (height / 2);
   speed = 3;
   health = 100;
 
-  playerRect = {x, y, width, height};
+  mouseX = xPos;
+  mouseY = yPos;
+
+  playerRect = {xPos, yPos, width, height};
+
+  playerSurface = IMG_Load("player.png");
+  playerTex = SDL_CreateTextureFromSurface(graphics.getRenderer(), playerSurface);
+  SDL_FreeSurface(playerSurface);
+
+  cout << "done initializing player!" << endl;
+}
+
+void Player::shoot() {
+  Bullet bull;
+  bull.init((xPos + width) - 5,(yPos + height) - (height / 2));
+  bullets.push_back(bull);
+}
+
+void Player::setMouseX(int x) {
+  mouseX = x;
+  cout << mouseX << endl;
+}
+
+void Player::setMouseY(int y) {
+  mouseY = y;
+  cout << mouseY << endl;
 }
 
 void Player::update() {
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 
-	if(keyState[SDL_SCANCODE_SPACE]) {
-		cout << "SHOTS FIRED!" << endl;
-
-      cout << bullets.size() << endl;
-      // Why does this need to be a single char?
-      // anything longer than one letter causes crash...
-      Bullet b;
-      b.init(1,1);
-      bullets.push_back(b);
-      cout << bullets.size() << endl;
-	}
-
 	if(keyState[SDL_SCANCODE_F] || keyState[SDL_SCANCODE_RIGHT]) {
-			x += speed;
+			xPos += speed;
 	}
 
 	if(keyState[SDL_SCANCODE_S] || keyState[SDL_SCANCODE_LEFT]) {
-			x -= speed;
+			xPos -= speed;
 	}
 
   if(keyState[SDL_SCANCODE_E] || keyState[SDL_SCANCODE_UP]) {
-      y -= speed;
+      yPos -= speed;
   }
 
   if(keyState[SDL_SCANCODE_D] || keyState[SDL_SCANCODE_DOWN]) {
-      y += speed;
+      yPos += speed;
   }
 
-  playerRect.x = x;
-  playerRect.y = y;
+  playerRect.x = xPos;
+  playerRect.y = yPos;
 }
 
 void Player::draw(Graphics &graphics) {
-  // for(int i = 0; i < bullets.size(); i++) {
-  //
-  // }
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
-  SDL_RenderFillRect(graphics.getRenderer(), &playerRect);
+  int opposite = mouseY - yPos;
+  int adjacent = mouseX  - xPos;
+  float angle = atan2(opposite, adjacent) * 180 / 3.14159265;
+  cout << opposite << " " << adjacent << " " << angle << endl;
+  SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
+  // SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
+  // SDL_RenderFillRect(graphics.getRenderer(), &playerRect);
+
+  for(int i = 0; i < bullets.size(); i++) {
+    bullets[i].update();
+    bullets[i].draw(graphics);
+  }
 }
 
 void Player::clean() {
-
+  SDL_DestroyTexture(playerTex);
+  cout << "Cleaned up player..." << endl;
 }

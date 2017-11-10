@@ -4,6 +4,7 @@ void Graphics::init() {
   cout << "initializing..." << endl;
   SDL_Init(SDL_INIT_EVERYTHING);
   SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &gameWindow, &gameRenderer);
+  cout << "done initializing graphics!" << endl;
 }
 
 SDL_Renderer *Graphics::getRenderer() {
@@ -20,5 +21,5 @@ void Graphics::clean() {
   SDL_DestroyWindow(gameWindow);
 
   SDL_Quit();
-  cout << "Cleaned up..." << endl;
+  cout << "Cleaned up graphics..." << endl;
 }

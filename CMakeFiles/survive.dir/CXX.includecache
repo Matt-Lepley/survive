@@ -21,8 +21,6 @@ graphics.h
 /home/lepley/Desktop/Apps/c++/Survive/src/player.cpp
 player.h
 /home/lepley/Desktop/Apps/c++/Survive/src/player.h
-globals.h
-/home/lepley/Desktop/Apps/c++/Survive/src/globals.h
 
 /home/lepley/Desktop/Apps/c++/Survive/src/survive.cpp
 game.h
@@ -55,6 +53,8 @@ globals.h
 headers/globals.h
 SDL2/SDL.h
 -
+SDL2/SDL_image.h
+-
 iostream
 -
 
@@ -63,6 +63,10 @@ graphics.h
 headers/graphics.h
 bullet.h
 headers/bullet.h
+globals.h
+headers/globals.h
 vector
+-
+cmath
 -
 

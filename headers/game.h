@@ -26,7 +26,8 @@ public:
 private:
   const int FPS = 60;						// Frames per second
 	const int MAX_FRAME_TIME = 1000 / FPS;	// Max time a frame can take
-	int LAST_UPDATE, CURRENT_TIME, ELAPSED_TIME;
+	int LAST_UPDATE = 0;
+  int CURRENT_TIME, ELAPSED_TIME;
 
   bool gameIsRunning = true;
 

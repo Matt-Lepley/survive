@@ -1,28 +1,23 @@
 #include "bullet.h"
 
 void Bullet::init(int x, int y) {
-  x = x;
-  y = y;
+  xPos = x;
+  yPos = y;
   width = 10;
   height = 10;
-  speed = 3;
+  speed = 1;
 
-  bulletRect = {x, y, width, height};
-}
-
-void Bullet::move() {
-  x += speed;
+  bulletRect = {xPos, yPos, width, height};
 }
 
 void Bullet::update() {
-  move();
+  xPos += speed;
 
-  bulletRect.x = x;
-  bulletRect.y = y;
+  bulletRect.x = xPos;
+  bulletRect.y = yPos;
 }
 
 void Bullet::draw(Graphics &graphics) {
-  update();
   SDL_SetRenderDrawColor(graphics.getRenderer(), 255, 0, 0, 255);
   SDL_RenderFillRect(graphics.getRenderer(), &bulletRect);
 }

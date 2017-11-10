@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1)
+set(CMAKE_BUILD_TYPE Debug)
 
 project("Survive")
 
@@ -21,7 +22,6 @@ src/bullet.cpp
 )
 
 include_directories(
-survive
 ${SDL2_INCLUDE_DIRS}
 ${SDL2IMAGE_INCLUDE_DIR}
 ${SDL2TTF_INCLUDE_DIR}
