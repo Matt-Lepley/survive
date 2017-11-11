@@ -1,8 +1,9 @@
 #include "bullet.h"
 
-void Bullet::init(int x, int y) {
+void Bullet::init(int x, int y, float a) {
   xPos = x;
   yPos = y;
+  angle = a;
   width = 10;
   height = 10;
   speed = 1;
@@ -10,8 +11,12 @@ void Bullet::init(int x, int y) {
   bulletRect = {xPos, yPos, width, height};
 }
 
-void Bullet::update() {
-  xPos += speed;
+void Bullet::update(float x, float y) {
+  float dx = cos(angle) * speed;
+  float dy = sin(angle) * speed;
+
+  xPos += dx;
+  yPos += dy;
 
   bulletRect.x = xPos;
   bulletRect.y = yPos;

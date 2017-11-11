@@ -26,17 +26,21 @@ void Game::handleEvents() {
 			gameIsRunning = false;
 		}
 
+    if(event.type == SDL_MOUSEMOTION) {
+      // Get mouse x and mouse y
+      // Get player x and player y
+      // Find horizontal distance between
+      // Find vertical distance between
+      // Calculate angle
+      player.setMouseX(event.button.x);
+      player.setMouseY(event.button.y);
+    }
+
 		// Mouse events
 		if(event.type == SDL_MOUSEBUTTONDOWN) {
 			if(event.button.button == SDL_BUTTON_LEFT) {
-        // Get mouse x and mouse y
-        // Get player x and player y
-        // Find horizontal distance between
-        // Find vertical distance between
-        // Calculate angle
-        player.setMouseX(event.button.x);
-        player.setMouseY(event.button.y);
-        player.shoot();
+
+        player.shoot(event.button.x, event.button.y);
 			}
 		}
 	}

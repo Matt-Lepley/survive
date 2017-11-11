@@ -13,7 +13,7 @@ class Player {
 public:
 
   void init(Graphics &graphics);
-  void shoot();
+  void shoot(int mouseX, int mouseY);
   void update();
   void draw(Graphics &graphics);
   void clean();

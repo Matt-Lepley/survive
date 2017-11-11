@@ -7,12 +7,13 @@
 class Bullet {
 
 public:
-  void init(int x, int y);
-  void update();
+  void init(int x, int y, float a);
+  void update(float x, float y);
   void draw(Graphics &graphics);
 
 private:
   int xPos, yPos, width, height, speed;
+  float angle;
   SDL_Rect bulletRect;
 };
 
