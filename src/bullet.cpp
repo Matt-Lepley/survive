@@ -6,17 +6,17 @@ void Bullet::init(int x, int y, float a) {
   angle = a;
   width = 10;
   height = 10;
-  speed = 1;
+  speed = 3;
 
   bulletRect = {xPos, yPos, width, height};
 }
 
-void Bullet::update(float x, float y) {
-  float dx = cos(angle) * speed;
-  float dy = sin(angle) * speed;
+void Bullet::update() {
+  float dirx = cos(angle * PI/180);
+  float diry = sin(angle * PI/180);
 
-  xPos += dx;
-  yPos += dy;
+  xPos += dirx * speed;
+  yPos += diry * speed;
 
   bulletRect.x = xPos;
   bulletRect.y = yPos;

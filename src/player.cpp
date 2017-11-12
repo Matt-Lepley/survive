@@ -21,11 +21,11 @@ void Player::init(Graphics &graphics) {
 
 void Player::shoot(int mouseX, int mouseY) {
   Bullet bull;
-  int bullX = (xPos + width) - 5;
+  int bullX = (xPos + width) - (width / 2);
   int bullY = (yPos + height) - (height / 2);
-  int opposite = mouseY - bullX;
-  int adjacent = mouseX  - bullY;
-  float angle = atan2(opposite, adjacent) * 180 / 3.14159265;
+  int opposite = mouseY - bullY;
+  int adjacent = mouseX  - bullX;
+  float angle = atan2(opposite, adjacent) * 180 / PI;
 
   bull.init(bullX, bullY, angle);
   bullets.push_back(bull);
@@ -63,17 +63,17 @@ void Player::update() {
 }
 
 void Player::draw(Graphics &graphics) {
-  int opposite = mouseY - yPos;
-  int adjacent = mouseX  - xPos;
-  float angle = atan2(opposite, adjacent) * 180 / 3.14159265;
-  SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
-  // SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
-  // SDL_RenderFillRect(graphics.getRenderer(), &playerRect);
 
+  // Draw bullets before player
   for(int i = 0; i < bullets.size(); i++) {
-    bullets[i].update(sin(angle), cos(angle));
+    bullets[i].update();
     bullets[i].draw(graphics);
   }
+
+  int opposite = mouseY - yPos;
+  int adjacent = mouseX  - xPos;
+  float angle = atan2(opposite, adjacent) * 180 / PI;
+  SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
 }
 
 void Player::clean() {

@@ -8,7 +8,7 @@ class Bullet {
 
 public:
   void init(int x, int y, float a);
-  void update(float x, float y);
+  void update();
   void draw(Graphics &graphics);
 
 private:
