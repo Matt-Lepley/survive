@@ -4,6 +4,7 @@ void Game::init() {
   cout << "initializing game.." << endl;
   graphics.init();
   player.init(graphics);
+  enemy.init(100,100);
   cout << "done initializing game!" << endl;
 }
 
@@ -57,6 +58,7 @@ void Game::gameloop() {
 
   player.update();
   player.draw(graphics);
+  enemy.draw(graphics);
 
   SDL_RenderPresent(graphics.getRenderer());
 

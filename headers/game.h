@@ -4,6 +4,7 @@
 #include "globals.h"
 #include "graphics.h"
 #include "player.h"
+#include "enemy.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -34,6 +35,7 @@ private:
   SDL_Event event;
   Graphics graphics;
   Player player;
+  Enemy enemy;
 };
 
 #endif

@@ -7,7 +7,7 @@
 class Enemy {
 
 public:
-  void init(Graphics &graphics);
+  void init(int x, int y);
   void update();
   void draw(Graphics &graphics);
   void clean();
