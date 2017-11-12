@@ -1,6 +1,6 @@
 #include "bullet.h"
 
-void Bullet::init(int x, int y, float a) {
+void Bullet::init(float x, float y, float a) {
   xPos = x;
   yPos = y;
   angle = a;
@@ -8,7 +8,7 @@ void Bullet::init(int x, int y, float a) {
   height = 10;
   speed = 3;
 
-  bulletRect = {xPos, yPos, width, height};
+  bulletRect = {int(xPos), int(yPos), width, height};
 }
 
 void Bullet::update() {
@@ -20,6 +20,14 @@ void Bullet::update() {
 
   bulletRect.x = xPos;
   bulletRect.y = yPos;
+}
+
+bool Bullet::outOfBounds() {
+  if(xPos < 0 || xPos > SCREEN_WIDTH ||
+     yPos < 0 || yPos > SCREEN_HEIGHT) {
+    return true;
+  }
+  return false;
 }
 
 void Bullet::draw(Graphics &graphics) {

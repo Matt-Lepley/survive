@@ -66,9 +66,15 @@ void Player::draw(Graphics &graphics) {
 
   // Draw bullets before player
   for(int i = 0; i < bullets.size(); i++) {
+    // Remove bullets from vector if off screen
+    if(bullets[i].outOfBounds()) {
+      bullets.erase(bullets.begin() + i);
+    }
     bullets[i].update();
     bullets[i].draw(graphics);
   }
+
+  cout << bullets.size() << endl;
 
   int opposite = mouseY - yPos;
   int adjacent = mouseX  - xPos;
