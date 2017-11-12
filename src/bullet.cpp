@@ -11,6 +11,10 @@ void Bullet::init(float x, float y, float a) {
   bulletRect = {int(xPos), int(yPos), width, height};
 }
 
+SDL_Rect Bullet::getRect() {
+  return bulletRect;
+}
+
 void Bullet::update() {
   float dirx = cos(angle * PI/180);
   float diry = sin(angle * PI/180);

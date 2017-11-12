@@ -9,6 +9,7 @@ class Enemy {
 public:
   void init(int x, int y);
   void update();
+  bool isHit(SDL_Rect bullRect);
   void draw(Graphics &graphics);
   void clean();
 

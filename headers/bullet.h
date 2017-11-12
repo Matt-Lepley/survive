@@ -11,6 +11,7 @@ public:
   void update();
   bool outOfBounds();
   void draw(Graphics &graphics);
+  SDL_Rect getRect();
 
 private:
   int width, height, speed;

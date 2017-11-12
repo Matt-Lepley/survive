@@ -19,6 +19,10 @@ void Player::init(Graphics &graphics) {
   cout << "done initializing player!" << endl;
 }
 
+vector<Bullet> Player::getBullets() {
+  return bullets;
+}
+
 void Player::shoot(int mouseX, int mouseY) {
   Bullet bull;
   int bullX = (xPos + width) - (width / 2);
@@ -73,8 +77,6 @@ void Player::draw(Graphics &graphics) {
     bullets[i].update();
     bullets[i].draw(graphics);
   }
-
-  cout << bullets.size() << endl;
 
   int opposite = mouseY - yPos;
   int adjacent = mouseX  - xPos;

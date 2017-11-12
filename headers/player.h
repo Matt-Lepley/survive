@@ -21,6 +21,8 @@ public:
   void setMouseX(int x);
   void setMouseY(int y);
 
+  vector<Bullet> getBullets();
+
 private:
   int xPos, yPos, speed, health;
   int width = 50;
