@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/survive.dir/src/enemy.cpp.o"
   "CMakeFiles/survive.dir/src/player.cpp.o"
   "CMakeFiles/survive.dir/src/survive.cpp.o"
   "CMakeFiles/survive.dir/src/game.cpp.o"

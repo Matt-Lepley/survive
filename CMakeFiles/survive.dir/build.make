@@ -57,9 +57,33 @@ include CMakeFiles/survive.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/survive.dir/flags.make
 
+CMakeFiles/survive.dir/src/enemy.cpp.o: CMakeFiles/survive.dir/flags.make
+CMakeFiles/survive.dir/src/enemy.cpp.o: src/enemy.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/survive.dir/src/enemy.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/enemy.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/enemy.cpp
+
+CMakeFiles/survive.dir/src/enemy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/survive.dir/src/enemy.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lepley/Desktop/Apps/c++/Survive/src/enemy.cpp > CMakeFiles/survive.dir/src/enemy.cpp.i
+
+CMakeFiles/survive.dir/src/enemy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/survive.dir/src/enemy.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lepley/Desktop/Apps/c++/Survive/src/enemy.cpp -o CMakeFiles/survive.dir/src/enemy.cpp.s
+
+CMakeFiles/survive.dir/src/enemy.cpp.o.requires:
+
+.PHONY : CMakeFiles/survive.dir/src/enemy.cpp.o.requires
+
+CMakeFiles/survive.dir/src/enemy.cpp.o.provides: CMakeFiles/survive.dir/src/enemy.cpp.o.requires
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/enemy.cpp.o.provides.build
+.PHONY : CMakeFiles/survive.dir/src/enemy.cpp.o.provides
+
+CMakeFiles/survive.dir/src/enemy.cpp.o.provides.build: CMakeFiles/survive.dir/src/enemy.cpp.o
+
+
 CMakeFiles/survive.dir/src/player.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/player.cpp.o: src/player.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/survive.dir/src/player.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/survive.dir/src/player.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/player.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/player.cpp
 
 CMakeFiles/survive.dir/src/player.cpp.i: cmake_force
@@ -83,7 +107,7 @@ CMakeFiles/survive.dir/src/player.cpp.o.provides.build: CMakeFiles/survive.dir/s
 
 CMakeFiles/survive.dir/src/survive.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/survive.cpp.o: src/survive.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/survive.dir/src/survive.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/survive.dir/src/survive.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/survive.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/survive.cpp
 
 CMakeFiles/survive.dir/src/survive.cpp.i: cmake_force
@@ -107,7 +131,7 @@ CMakeFiles/survive.dir/src/survive.cpp.o.provides.build: CMakeFiles/survive.dir/
 
 CMakeFiles/survive.dir/src/game.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/game.cpp.o: src/game.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/survive.dir/src/game.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/survive.dir/src/game.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/game.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/game.cpp
 
 CMakeFiles/survive.dir/src/game.cpp.i: cmake_force
@@ -131,7 +155,7 @@ CMakeFiles/survive.dir/src/game.cpp.o.provides.build: CMakeFiles/survive.dir/src
 
 CMakeFiles/survive.dir/src/graphics.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/graphics.cpp.o: src/graphics.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/survive.dir/src/graphics.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/survive.dir/src/graphics.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/graphics.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/graphics.cpp
 
 CMakeFiles/survive.dir/src/graphics.cpp.i: cmake_force
@@ -155,7 +179,7 @@ CMakeFiles/survive.dir/src/graphics.cpp.o.provides.build: CMakeFiles/survive.dir
 
 CMakeFiles/survive.dir/src/bullet.cpp.o: CMakeFiles/survive.dir/flags.make
 CMakeFiles/survive.dir/src/bullet.cpp.o: src/bullet.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/survive.dir/src/bullet.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/survive.dir/src/bullet.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/bullet.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/bullet.cpp
 
 CMakeFiles/survive.dir/src/bullet.cpp.i: cmake_force
@@ -179,6 +203,7 @@ CMakeFiles/survive.dir/src/bullet.cpp.o.provides.build: CMakeFiles/survive.dir/s
 
 # Object files for target survive
 survive_OBJECTS = \
+"CMakeFiles/survive.dir/src/enemy.cpp.o" \
 "CMakeFiles/survive.dir/src/player.cpp.o" \
 "CMakeFiles/survive.dir/src/survive.cpp.o" \
 "CMakeFiles/survive.dir/src/game.cpp.o" \
@@ -188,6 +213,7 @@ survive_OBJECTS = \
 # External object files for target survive
 survive_EXTERNAL_OBJECTS =
 
+survive: CMakeFiles/survive.dir/src/enemy.cpp.o
 survive: CMakeFiles/survive.dir/src/player.cpp.o
 survive: CMakeFiles/survive.dir/src/survive.cpp.o
 survive: CMakeFiles/survive.dir/src/game.cpp.o
@@ -195,7 +221,7 @@ survive: CMakeFiles/survive.dir/src/graphics.cpp.o
 survive: CMakeFiles/survive.dir/src/bullet.cpp.o
 survive: CMakeFiles/survive.dir/build.make
 survive: CMakeFiles/survive.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable survive"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable survive"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/survive.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -203,6 +229,7 @@ CMakeFiles/survive.dir/build: survive
 
 .PHONY : CMakeFiles/survive.dir/build
 
+CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/enemy.cpp.o.requires
 CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/player.cpp.o.requires
 CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/survive.cpp.o.requires
 CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/game.cpp.o.requires

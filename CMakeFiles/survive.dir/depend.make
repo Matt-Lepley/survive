@@ -6,6 +6,8 @@ CMakeFiles/survive.dir/src/bullet.cpp.o: headers/bullet.h
 CMakeFiles/survive.dir/src/bullet.cpp.o: headers/globals.h
 CMakeFiles/survive.dir/src/bullet.cpp.o: headers/graphics.h
 
+CMakeFiles/survive.dir/src/enemy.cpp.o: src/enemy.cpp
+
 CMakeFiles/survive.dir/src/game.cpp.o: src/game.cpp
 CMakeFiles/survive.dir/src/game.cpp.o: headers/bullet.h
 CMakeFiles/survive.dir/src/game.cpp.o: headers/game.h

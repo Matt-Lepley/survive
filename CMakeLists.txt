@@ -14,6 +14,7 @@ PKG_SEARCH_MODULE(SDL2TTF REQUIRED SDL2_ttf>=2.0.0)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCES
+src/enemy.cpp
 src/player.cpp
 src/survive.cpp
 src/game.cpp
