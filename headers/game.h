@@ -8,6 +8,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -35,7 +36,7 @@ private:
   SDL_Event event;
   Graphics graphics;
   Player player;
-  Enemy enemy;
+  vector<Enemy> enemies = {};
 };
 
 #endif
