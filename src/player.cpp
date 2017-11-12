@@ -19,6 +19,14 @@ void Player::init(Graphics &graphics) {
   cout << "done initializing player!" << endl;
 }
 
+int Player::getXPos() {
+  return xPos;
+}
+
+int Player::getYPos() {
+  return yPos;
+}
+
 vector<Bullet> Player::getBullets() {
   return bullets;
 }

@@ -7,7 +7,7 @@
 - [x] INPUT
 - [x] PLAYER
 - [x] SHOOTING
-- [ ] ENEMIES
+- [x] ENEMIES
 - [ ] GAME STATES
 - [ ] MENUS
 - [ ] POWER UPS

@@ -18,6 +18,8 @@ public:
   void draw(Graphics &graphics);
   void clean();
 
+  int getXPos();
+  int getYPos();
   void setMouseX(int x);
   void setMouseY(int y);
 

@@ -66,8 +66,11 @@ void Game::gameloop() {
     for(int j = 0; j < player.getBullets().size(); j++) {
       if(enemies[i].isHit(player.getBullets()[j].getRect())) {
         enemies.erase(enemies.begin() + i);
+        // Figure out how to destroy bullet on contact
+        // player.getBullets().erase(player.getBullets().begin() + j);
       }
     }
+    enemies[i].update(player.getXPos(), player.getYPos());
     enemies[i].draw(graphics);
   }
 

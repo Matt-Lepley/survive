@@ -9,8 +9,22 @@ void Enemy::init(int x, int y){
   enemyRect = {xPos, yPos, width, height};
 }
 
-void Enemy::update(){
+void Enemy::update(int playerX, int playerY){
+  if(playerX > xPos) {
+    xPos+=speed;
+  }
+  if(playerX < xPos) {
+    xPos-=speed;
+  }
+  if(playerY > yPos) {
+    yPos+=speed;
+  }
+  if(playerY < yPos) {
+    yPos-=speed;
+  }
 
+  enemyRect.x = xPos;
+  enemyRect.y = yPos;
 }
 
 bool Enemy::isHit(SDL_Rect bullRect) {
