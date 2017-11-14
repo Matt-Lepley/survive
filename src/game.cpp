@@ -70,8 +70,8 @@ void Game::gameloop() {
         // player.getBullets().erase(player.getBullets().begin() + j);
       }
     }
-    enemies[i].update(player.getXPos(), player.getYPos());
-    enemies[i].draw(graphics);
+    // enemies[i].update(player.getXPos(), player.getYPos());
+    // enemies[i].draw(graphics);
   }
 
   SDL_RenderPresent(graphics.getRenderer());

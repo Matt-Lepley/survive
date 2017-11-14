@@ -87,22 +87,57 @@ void Player::draw(Graphics &graphics) {
   }
 
   int opposite = mouseY - yPos;
-  int adjacent = mouseX  - xPos;
+  int adjacent = mouseX - xPos;
   float angle = atan2(opposite, adjacent) * 180 / PI;
   SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
 
-  // Non-rotated top left vertex
-  SDL_Rect tempR = {xPos, yPos, 5, 5};
 
-  // Rotated top left vertex
+  // Covert angle to radians
   float ang = angle * PI / 180;
-  int rX = (xPos - 25)*cos(ang) - (yPos - 25)*sin(ang) + 25;
-  int rY = (xPos - 25)*sin(ang) + (yPos - 25)*cos(ang) + 25;
-  SDL_Rect tempR2 = {rX, rY, 5, 5};
+
+  // Top left
+  // Start at -25, -25 (assuming player is 50x50) so center is at 0,0
+  int tlX = (-(width/2))*cos(ang) - (-(height/2))*sin(ang);
+  int tlY = (-(width/2))*sin(ang) + (-(height/2))*cos(ang);
+  // Move the rotated positions relative to player
+  tlX += xPos + (width/2);
+  tlY += yPos + (height/2);
+
+  // Top right
+  // Start at 25, -25 (assuming player is 50x50) so center is at 0,0
+  int trX = (width/2)*cos(ang) - (-(height/2))*sin(ang);
+  int trY = (width/2)*sin(ang) + (-(height/2))*cos(ang);
+  // Move the rotated positions relative to player
+  trX += xPos + (width/2);
+  trY += yPos + (height/2);
+
+  // bottom right
+  // Start at 25, 25 (assuming player is 50x50) so center is at 0,0
+  int brX = (width/2)*cos(ang) - (height/2)*sin(ang);
+  int brY = (width/2)*sin(ang) + (height/2)*cos(ang);
+  // Move the rotated positions relative to player
+  brX += xPos + (width/2);
+  brY += yPos + (height/2);
+
+  // bottom left
+  // Start at -25, 25 (assuming player is 50x50) so center is at 0,0
+  int blX = (-(width/2))*cos(ang) - (height/2)*sin(ang);
+  int blY = (-(width/2))*sin(ang) + (height/2)*cos(ang);
+  // Move the rotated positions relative to player
+  blX += xPos + (width/2);
+  blY += yPos + (height/2);
+
+  // Draw
+  SDL_Rect topLeftR = {tlX, tlY, 5, 5};
+  SDL_Rect topRightR = {trX, trY, 5, 5};
+  SDL_Rect bottomRightR = {brX, brY, 5, 5};
+  SDL_Rect bottomLeftR = {blX, blY, 5, 5};
 
   SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
-  SDL_RenderFillRect(graphics.getRenderer(), &tempR);
-  SDL_RenderFillRect(graphics.getRenderer(), &tempR2);
+  SDL_RenderFillRect(graphics.getRenderer(), &topLeftR);
+  SDL_RenderFillRect(graphics.getRenderer(), &topRightR);
+  SDL_RenderFillRect(graphics.getRenderer(), &bottomRightR);
+  SDL_RenderFillRect(graphics.getRenderer(), &bottomLeftR);
 }
 
 void Player::clean() {
