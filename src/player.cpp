@@ -90,6 +90,19 @@ void Player::draw(Graphics &graphics) {
   int adjacent = mouseX  - xPos;
   float angle = atan2(opposite, adjacent) * 180 / PI;
   SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
+
+  // Non-rotated top left vertex
+  SDL_Rect tempR = {xPos, yPos, 5, 5};
+
+  // Rotated top left vertex
+  float ang = angle * PI / 180;
+  int rX = (xPos - 25)*cos(ang) - (yPos - 25)*sin(ang) + 25;
+  int rY = (xPos - 25)*sin(ang) + (yPos - 25)*cos(ang) + 25;
+  SDL_Rect tempR2 = {rX, rY, 5, 5};
+
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
+  SDL_RenderFillRect(graphics.getRenderer(), &tempR);
+  SDL_RenderFillRect(graphics.getRenderer(), &tempR2);
 }
 
 void Player::clean() {
