@@ -5,10 +5,14 @@
 #include "graphics.h"
 #include "player.h"
 #include "enemy.h"
+#include "gameobject.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <array>
 #include <vector>
+#include <random>
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -19,6 +23,15 @@ public:
   void init();
   void capFrames();
   void handleEvents();
+
+  void populateSpawnPoints();
+  pair<int, int> enemySpawnPoint();
+
+  void generateEnemies();
+  bool shouldDropItem();
+  int itemDropType();
+  void dropItem(Enemy enemy);
+
   void gameloop();
   void clean();
 
@@ -37,6 +50,9 @@ private:
   Graphics graphics;
   Player player;
   vector<Enemy> enemies = {};
+  vector<Gameobject> drops = {};
+  int wave = 1;
+  vector<pair<int, int>> spawnPoints = {};
 };
 
 #endif

@@ -20,6 +20,7 @@ src/survive.cpp
 src/game.cpp
 src/graphics.cpp
 src/bullet.cpp
+src/gameobject.cpp
 )
 
 include_directories(

@@ -19,6 +19,10 @@ void Player::init(Graphics &graphics) {
   cout << "done initializing player!" << endl;
 }
 
+void Player::destroyBullet(int index) {
+  bullets.erase(bullets.begin() + index);
+}
+
 int Player::getXPos() {
   return xPos;
 }
@@ -51,6 +55,39 @@ void Player::setMouseY(int y) {
   mouseY = y;
 }
 
+bool Player::collision(Gameobject obj, vector<Enemy>* enemies) {
+  SDL_Rect tempR = obj.getRect();
+  if(tempR.x + tempR.w > playerRect.x &&
+     tempR.x < playerRect.x + playerRect.w &&
+     tempR.y + tempR.h > playerRect.y &&
+     tempR.y < playerRect.y + playerRect.h) {
+       handleBuff(obj.getDropValue(), enemies);
+       return true;
+     }
+  return false;
+}
+
+void Player::handleBuff(int value, vector<Enemy>* enemies) {
+  if(value == DROPS::DoubleSpeed) {
+    alterSpeed();
+  }
+  if(value == DROPS::Nuke) {
+    nuke(enemies);
+  }
+}
+
+// Figure out timer for speed buffs
+void Player::alterSpeed() {
+  if(speed == 3) {
+    speed *= 2;
+  }
+}
+
+void Player::nuke(vector<Enemy>* enemies) {
+  cout << "DIE ALLL" << endl;
+  enemies->clear();
+}
+
 void Player::update() {
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 
@@ -74,6 +111,70 @@ void Player::update() {
   playerRect.y = yPos;
 }
 
+void Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
+
+  // Covert angle to radians
+  // float ang = angle * PI / 180;
+  // int tempX, tempY;
+  // vector<pair<int, int>> coords = {};
+  //
+  // // Center
+  // tempX = (0)*cos(ang) - (0)*sin(ang);
+  // tempY = (0)*sin(ang) + (0)*cos(ang);
+  // // Move the rotated positions relative to player
+  // tempX += xPos + (width/2);
+  // tempY += yPos + (height/2);
+  //
+  // coords.push_back(pair<int,int>(tempX, tempY));
+  //
+  // // Top right
+  // // Start at 25, -25 (assuming player is 50x50) so center is at 0,0
+  // tempX = (width/2)*cos(ang) - (-(height/2))*sin(ang);
+  // tempY = (width/2)*sin(ang) + (-(height/2))*cos(ang);
+  // // Move the rotated positions relative to player
+  // tempX += xPos + (width/2);
+  // tempY += yPos + (height/2);
+  //
+  // coords.push_back(pair<int,int>(tempX, tempY));
+  //
+  // // bottom right
+  // // Start at 25, 25 (assuming player is 50x50) so center is at 0,0
+  // tempX = (width/2)*cos(ang) - (height/2)*sin(ang);
+  // tempY = (width/2)*sin(ang) + (height/2)*cos(ang);
+  // // Move the rotated positions relative to player
+  // tempX += xPos + (width/2);
+  // tempY += yPos + (height/2);
+  //
+  // coords.push_back(pair<int,int>(tempX, tempY));
+  //
+  // // bottom left
+  // // Start at -25, 25 (assuming player is 50x50) so center is at 0,0
+  // tempX = (-(width/2))*cos(ang) - (height/2)*sin(ang);
+  // tempY = (-(width/2))*sin(ang) + (height/2)*cos(ang);
+  // // Move the rotated positions relative to player
+  // tempX += xPos + (width/2);
+  // tempY += yPos + (height/2);
+  //
+  // coords.push_back(pair<int,int>(tempX, tempY));
+  //
+  // // Top left
+  // // Start at -25, -25 (assuming player is 50x50) so center is at 0,0
+  // tempX = (-(width/2))*cos(ang) - (-(height/2))*sin(ang);
+  // tempY = (-(width/2))*sin(ang) + (-(height/2))*cos(ang);
+  // // Move the rotated positions relative to player
+  // tempX += xPos + (width/2);
+  // tempY += yPos + (height/2);
+  //
+  // coords.push_back(pair<int,int>(tempX, tempY));
+  //
+  // SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
+  // Draw vertices rects
+  // for(int i = 0; i < coords.size(); i++) {
+  //   SDL_Rect tempR = {coords[i].first, coords[i].second, 5, 5};
+  //   SDL_RenderFillRect(graphics.getRenderer(), &tempR);
+  // }
+}
+
 void Player::draw(Graphics &graphics) {
 
   // Draw bullets before player
@@ -88,56 +189,20 @@ void Player::draw(Graphics &graphics) {
 
   int opposite = mouseY - yPos;
   int adjacent = mouseX - xPos;
-  float angle = atan2(opposite, adjacent) * 180 / PI;
+  angle = atan2(opposite, adjacent) * 180 / PI;
   SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
 
-
-  // Covert angle to radians
-  float ang = angle * PI / 180;
-
-  // Top left
-  // Start at -25, -25 (assuming player is 50x50) so center is at 0,0
-  int tlX = (-(width/2))*cos(ang) - (-(height/2))*sin(ang);
-  int tlY = (-(width/2))*sin(ang) + (-(height/2))*cos(ang);
-  // Move the rotated positions relative to player
-  tlX += xPos + (width/2);
-  tlY += yPos + (height/2);
-
-  // Top right
-  // Start at 25, -25 (assuming player is 50x50) so center is at 0,0
-  int trX = (width/2)*cos(ang) - (-(height/2))*sin(ang);
-  int trY = (width/2)*sin(ang) + (-(height/2))*cos(ang);
-  // Move the rotated positions relative to player
-  trX += xPos + (width/2);
-  trY += yPos + (height/2);
-
-  // bottom right
-  // Start at 25, 25 (assuming player is 50x50) so center is at 0,0
-  int brX = (width/2)*cos(ang) - (height/2)*sin(ang);
-  int brY = (width/2)*sin(ang) + (height/2)*cos(ang);
-  // Move the rotated positions relative to player
-  brX += xPos + (width/2);
-  brY += yPos + (height/2);
-
-  // bottom left
-  // Start at -25, 25 (assuming player is 50x50) so center is at 0,0
-  int blX = (-(width/2))*cos(ang) - (height/2)*sin(ang);
-  int blY = (-(width/2))*sin(ang) + (height/2)*cos(ang);
-  // Move the rotated positions relative to player
-  blX += xPos + (width/2);
-  blY += yPos + (height/2);
-
-  // Draw
-  SDL_Rect topLeftR = {tlX, tlY, 5, 5};
-  SDL_Rect topRightR = {trX, trY, 5, 5};
-  SDL_Rect bottomRightR = {brX, brY, 5, 5};
-  SDL_Rect bottomLeftR = {blX, blY, 5, 5};
-
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
-  SDL_RenderFillRect(graphics.getRenderer(), &topLeftR);
-  SDL_RenderFillRect(graphics.getRenderer(), &topRightR);
-  SDL_RenderFillRect(graphics.getRenderer(), &bottomRightR);
-  SDL_RenderFillRect(graphics.getRenderer(), &bottomLeftR);
+  // Draw perp rects
+  // SDL_SetRenderDrawColor(graphics.getRenderer(), 125, 255, 200, 255);
+  // for(int i = 0; i < coords.size(); i++) {
+  //   pair<int,int> p1 = coords[i];
+  //   pair<int,int> p2 = coords[i + 1 == coords.size() ? 0 : i + 1];
+  //   int tempX = p1.first - p2.first;
+  //   int tempY = p1.second - p2.second;
+  //   pair<int,int> perpEdge = {-tempY + 100, tempX + 100};
+  //   SDL_Rect tempR = {perpEdge.first, perpEdge.second, 5, 5};
+  //   SDL_RenderFillRect(graphics.getRenderer(), &tempR);
+  // }
 }
 
 void Player::clean() {

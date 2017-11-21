@@ -2,14 +2,39 @@
 
 void Game::init() {
   cout << "initializing game.." << endl;
+  populateSpawnPoints();
   graphics.init();
   player.init(graphics);
-  for(int i = 0; i < 5; i++) {
-    Enemy enemy;
-    enemy.init(75*i, 50);
-    enemies.push_back(enemy);
-  }
   cout << "done initializing game!" << endl;
+}
+
+void Game::generateEnemies() {
+  if(enemies.size() == 0) {
+    for(int i = 0; i < (wave * 5); i++) {
+      Enemy enemy;
+      pair<int, int> pos = enemySpawnPoint();
+      enemy.init(pos.first, pos.second);
+      enemies.push_back(enemy);
+    }
+    wave++;
+  }
+}
+
+pair<int, int> Game::enemySpawnPoint() {
+  random_device rd;
+  mt19937 gen(rd());;
+  uniform_int_distribution<int> dis(0, spawnPoints.size() - 1);
+  uniform_int_distribution<int> dis2(-50, 50);
+
+  int pos = dis(gen);
+  int xoffset = dis2(gen);
+  int yoffset = dis2(gen);
+
+  pair<int, int> tempPair = spawnPoints[pos];
+  tempPair.first += xoffset;
+  tempPair.second += yoffset;
+
+  return tempPair;
 }
 
 void Game::capFrames() {
@@ -19,6 +44,31 @@ void Game::capFrames() {
 	if (ELAPSED_TIME < MAX_FRAME_TIME) {
 		SDL_Delay(MAX_FRAME_TIME - ELAPSED_TIME);
 	}
+}
+
+bool Game::shouldDropItem() {
+  random_device rd;
+  mt19937 gen(rd());;
+  uniform_int_distribution<int> dis(1, 100);
+
+  // 15% chance to drop item
+  return dis(gen) < 15 ? true : false;
+}
+
+int Game::itemDropType() {
+  random_device rd;
+  mt19937 gen(rd());;
+  uniform_int_distribution<int> dis(0, DROPS::NUM_DROPS - 1);
+
+  return dis(gen);
+}
+
+void Game::dropItem(Enemy enemy) {
+  if(shouldDropItem()) {
+    Gameobject g;
+    g.init(itemDropType(), enemy.getX(), enemy.getY());
+    drops.push_back(g);
+  }
 }
 
 void Game::handleEvents() {
@@ -32,11 +82,6 @@ void Game::handleEvents() {
 		}
 
     if(event.type == SDL_MOUSEMOTION) {
-      // Get mouse x and mouse y
-      // Get player x and player y
-      // Find horizontal distance between
-      // Find vertical distance between
-      // Calculate angle
       player.setMouseX(event.button.x);
       player.setMouseY(event.button.y);
     }
@@ -60,18 +105,30 @@ void Game::gameloop() {
   // Cap framerate before any rendering
   capFrames();
 
+  generateEnemies();
+
   player.update();
   player.draw(graphics);
   for(int i = 0; i < enemies.size(); i++) {
     for(int j = 0; j < player.getBullets().size(); j++) {
       if(enemies[i].isHit(player.getBullets()[j].getRect())) {
+        dropItem(enemies[i]);
         enemies.erase(enemies.begin() + i);
-        // Figure out how to destroy bullet on contact
-        // player.getBullets().erase(player.getBullets().begin() + j);
+        player.destroyBullet(j);
       }
     }
-    // enemies[i].update(player.getXPos(), player.getYPos());
-    // enemies[i].draw(graphics);
+    enemies[i].update(player.getXPos(), player.getYPos());
+    enemies[i].draw(graphics);
+  }
+
+  player.enemyCollision(graphics, &enemies);
+
+  for(int i = 0; i < drops.size(); i++) {
+    if(player.collision(drops[i], &enemies)) {
+      drops.erase(drops.begin() + i);
+    } else {
+      drops[i].draw(graphics);  // Only draw if player hasn't picked up
+    }
   }
 
   SDL_RenderPresent(graphics.getRenderer());
@@ -87,4 +144,30 @@ bool Game::isRunning() {
 void Game::clean() {
   player.clean();
   graphics.clean();
+}
+
+void Game::populateSpawnPoints() {
+  ifstream file("spawnPoints.txt");
+	string str;
+	int counter = 0;
+	while(getline(file, str)) {
+    pair<int, int> tempPair;
+		int startPos = 0;
+		int col = 1;
+		string path, temp;
+		for(int i = 0; i < str.length(); i++) {
+			if(str.substr(i,1) == ",") {
+				if(col == 1) {
+					tempPair.first = stoi(str.substr(startPos, i));
+          col++;
+          startPos = i;
+				}
+				if(col == 2) {
+				  tempPair.second = stoi(str.substr(startPos + 1, str.length() - startPos + 1));
+			  }
+			}
+		}
+		spawnPoints.push_back(tempPair);
+	}
+	file.close();
 }

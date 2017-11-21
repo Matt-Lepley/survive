@@ -16,9 +16,15 @@ CMakeFiles/survive.dir/src/game.cpp.o
  headers/bullet.h
  headers/enemy.h
  headers/game.h
+ headers/gameobject.h
  headers/globals.h
  headers/graphics.h
  headers/player.h
+CMakeFiles/survive.dir/src/gameobject.cpp.o
+ /home/lepley/Desktop/Apps/c++/Survive/src/gameobject.cpp
+ headers/gameobject.h
+ headers/globals.h
+ headers/graphics.h
 CMakeFiles/survive.dir/src/graphics.cpp.o
  /home/lepley/Desktop/Apps/c++/Survive/src/graphics.cpp
  headers/globals.h
@@ -26,6 +32,8 @@ CMakeFiles/survive.dir/src/graphics.cpp.o
 CMakeFiles/survive.dir/src/player.cpp.o
  /home/lepley/Desktop/Apps/c++/Survive/src/player.cpp
  headers/bullet.h
+ headers/enemy.h
+ headers/gameobject.h
  headers/globals.h
  headers/graphics.h
  headers/player.h
@@ -34,6 +42,7 @@ CMakeFiles/survive.dir/src/survive.cpp.o
  headers/bullet.h
  headers/enemy.h
  headers/game.h
+ headers/gameobject.h
  headers/globals.h
  headers/graphics.h
  headers/player.h

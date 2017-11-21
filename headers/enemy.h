@@ -3,6 +3,8 @@
 
 #include "graphics.h"
 #include "globals.h"
+#include <vector>
+using namespace std;
 
 class Enemy {
 
@@ -12,6 +14,9 @@ public:
   bool isHit(SDL_Rect bullRect);
   void draw(Graphics &graphics);
   void clean();
+
+  int getX();
+  int getY();
 
 private:
   int xPos, yPos, speed, health;
