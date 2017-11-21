@@ -24,6 +24,8 @@ public:
   void capFrames();
   void handleEvents();
 
+  int getGamestate();
+
   void populateSpawnPoints();
   pair<int, int> enemySpawnPoint();
 
@@ -32,6 +34,7 @@ public:
   int itemDropType();
   void dropItem(Enemy enemy);
 
+  void startMenuLoop();
   void gameloop();
   void clean();
 
@@ -47,12 +50,18 @@ private:
   bool gameIsRunning = true;
 
   SDL_Event event;
+  SDL_Rect screenRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+  SDL_Rect startGameRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 - 50, 300, 100};
+  SDL_Rect quitGameRect = {SCREEN_WIDTH / 2 - 150, startGameRect.y + 150, 300, 100};
+
+  // Objects
   Graphics graphics;
   Player player;
   vector<Enemy> enemies = {};
   vector<Gameobject> drops = {};
   int wave = 1;
   vector<pair<int, int>> spawnPoints = {};
+  int gamestate = GAMESTATES::StartMenu;
 };
 
 #endif

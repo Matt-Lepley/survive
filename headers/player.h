@@ -26,6 +26,7 @@ public:
   void setMouseX(int x);
   void setMouseY(int y);
   bool collision(Gameobject obj, vector<Enemy>* enemies);
+  bool outOfBounds();
   void enemyCollision(Graphics &graphics, vector<Enemy> *enemies);
   void handleBuff(int value, vector<Enemy>* enemies);
   void alterSpeed();

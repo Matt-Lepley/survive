@@ -11,4 +11,11 @@ enum DROPS {
   NUM_DROPS
 };
 
+enum GAMESTATES {
+  StartMenu,
+  Playing,
+  Paused,
+  Gameover
+};
+
 #endif

@@ -1,12 +1,16 @@
 #include "enemy.h"
 
-void Enemy::init(int x, int y){
+void Enemy::init(Graphics &graphics, int x, int y){
   xPos = x;
   yPos = y;
   speed = 1;
   health = 100;
 
   enemyRect = {xPos, yPos, width, height};
+
+  enemySurface = IMG_Load("enemy.png");
+  enemyTex = SDL_CreateTextureFromSurface(graphics.getRenderer(), enemySurface);
+  SDL_FreeSurface(enemySurface);
 }
 
 int Enemy::getX() {
@@ -47,8 +51,7 @@ bool Enemy::isHit(SDL_Rect bullRect) {
 }
 
 void Enemy::draw(Graphics &graphics){
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 255, 0, 0, 255);
-  SDL_RenderFillRect(graphics.getRenderer(), &enemyRect);
+  SDL_RenderCopy(graphics.getRenderer(), enemyTex, NULL, &enemyRect);
 
   // int tempX, tempY;
   // vector<pair<int, int>> coords = {};
@@ -94,5 +97,6 @@ void Enemy::draw(Graphics &graphics){
 }
 
 void Enemy::clean(){
-
+  SDL_DestroyTexture(enemyTex);
+  cout << "Cleaned up enemy..." << endl;
 }

@@ -9,7 +9,7 @@ using namespace std;
 class Enemy {
 
 public:
-  void init(int x, int y);
+  void init(Graphics &graphics, int x, int y);
   void update(int playerX, int playerY);
   bool isHit(SDL_Rect bullRect);
   void draw(Graphics &graphics);
@@ -24,6 +24,8 @@ private:
   int height = 30;
 
   SDL_Rect enemyRect;
+  SDL_Surface *enemySurface;
+  SDL_Texture *enemyTex;
 };
 
 #endif

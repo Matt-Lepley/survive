@@ -8,12 +8,16 @@ void Game::init() {
   cout << "done initializing game!" << endl;
 }
 
+int Game::getGamestate() {
+  return gamestate;
+}
+
 void Game::generateEnemies() {
   if(enemies.size() == 0) {
     for(int i = 0; i < (wave * 5); i++) {
       Enemy enemy;
       pair<int, int> pos = enemySpawnPoint();
-      enemy.init(pos.first, pos.second);
+      enemy.init(graphics, pos.first, pos.second);
       enemies.push_back(enemy);
     }
     wave++;
@@ -90,20 +94,54 @@ void Game::handleEvents() {
 		if(event.type == SDL_MOUSEBUTTONDOWN) {
 			if(event.button.button == SDL_BUTTON_LEFT) {
 
-        player.shoot(event.button.x, event.button.y);
+        if(gamestate == GAMESTATES::StartMenu) {
+          if(event.button.x > startGameRect.x &&
+             event.button.x < startGameRect.x + startGameRect.w &&
+             event.button.y > startGameRect.y &&
+             event.button.y < startGameRect.y + startGameRect.h) {
+               gamestate = GAMESTATES::Playing;
+          }
+
+          if(event.button.x > quitGameRect.x &&
+             event.button.x < quitGameRect.x + quitGameRect.w &&
+             event.button.y > quitGameRect.y &&
+             event.button.y < quitGameRect.y + quitGameRect.h) {
+               gameIsRunning = false;
+          }
+        }
+
+        if(gamestate == GAMESTATES::Playing) {
+          player.shoot(event.button.x, event.button.y);
+        }
 			}
 		}
 	}
 }
 
-void Game::gameloop() {
-
+void Game::startMenuLoop() {
   graphics.clear();
-
   handleEvents();
+  capFrames();  // Cap framerate before any rendering
 
-  // Cap framerate before any rendering
-  capFrames();
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 255,255,0,255);
+  SDL_RenderFillRect(graphics.getRenderer(), &screenRect);
+
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 0,255,0,255);
+  SDL_RenderFillRect(graphics.getRenderer(), &startGameRect);
+
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 255,0,0,255);
+  SDL_RenderFillRect(graphics.getRenderer(), &quitGameRect);
+
+  SDL_RenderPresent(graphics.getRenderer());
+
+  // Update for framerate capping
+  LAST_UPDATE = CURRENT_TIME;
+}
+
+void Game::gameloop() {
+  graphics.clear();
+  handleEvents();
+  capFrames();  // Cap framerate before any rendering
 
   generateEnemies();
 
@@ -113,6 +151,7 @@ void Game::gameloop() {
     for(int j = 0; j < player.getBullets().size(); j++) {
       if(enemies[i].isHit(player.getBullets()[j].getRect())) {
         dropItem(enemies[i]);
+        enemies[i].clean();
         enemies.erase(enemies.begin() + i);
         player.destroyBullet(j);
       }

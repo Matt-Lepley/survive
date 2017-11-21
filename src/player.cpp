@@ -55,6 +55,17 @@ void Player::setMouseY(int y) {
   mouseY = y;
 }
 
+bool Player::outOfBounds() {
+  if(xPos > 0 &&
+     xPos + width < SCREEN_WIDTH &&
+     yPos > 0 &&
+     yPos + height < SCREEN_HEIGHT) {
+       return false;
+     }
+
+  return true;
+}
+
 bool Player::collision(Gameobject obj, vector<Enemy>* enemies) {
   SDL_Rect tempR = obj.getRect();
   if(tempR.x + tempR.w > playerRect.x &&
@@ -92,19 +103,37 @@ void Player::update() {
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 
 	if(keyState[SDL_SCANCODE_F] || keyState[SDL_SCANCODE_RIGHT]) {
-			xPos += speed;
+    int dToEdge = SCREEN_WIDTH - (xPos + width);
+    if(dToEdge < speed) {
+      xPos += dToEdge;
+    } else {
+      xPos += speed;
+    }
 	}
 
 	if(keyState[SDL_SCANCODE_S] || keyState[SDL_SCANCODE_LEFT]) {
-			xPos -= speed;
+    if(xPos < speed) {
+      xPos -= xPos;
+    } else {
+      xPos -= speed;
+    }
 	}
 
   if(keyState[SDL_SCANCODE_E] || keyState[SDL_SCANCODE_UP]) {
+    if(yPos < speed) {
+      yPos -= yPos;
+    } else {
       yPos -= speed;
+    }
   }
 
   if(keyState[SDL_SCANCODE_D] || keyState[SDL_SCANCODE_DOWN]) {
+    int dToEdge = SCREEN_HEIGHT - (yPos + height);
+    if(dToEdge < speed) {
+      yPos += dToEdge;
+    } else {
       yPos += speed;
+    }
   }
 
   playerRect.x = xPos;
