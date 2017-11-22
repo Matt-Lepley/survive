@@ -6,11 +6,14 @@ void Player::init(Graphics &graphics) {
   yPos = (SCREEN_HEIGHT / 2) - (height / 2);
   speed = 3;
   health = 100;
+  maxHealth = health;
 
   mouseX = xPos;
   mouseY = yPos;
 
   playerRect = {xPos, yPos, width, height};
+  healthRect = {xPos - (health / 2), yPos - 50, health, 10};
+  maxHealthRect = {healthRect.x - 2, healthRect.y - 2, healthRect.w + 4, healthRect.h + 4};
 
   playerSurface = IMG_Load("player.png");
   playerTex = SDL_CreateTextureFromSurface(graphics.getRenderer(), playerSurface);
@@ -29,6 +32,14 @@ int Player::getXPos() {
 
 int Player::getYPos() {
   return yPos;
+}
+
+int Player::getW() {
+  return width;
+}
+
+int Player::getH() {
+  return height;
 }
 
 vector<Bullet> Player::getBullets() {
@@ -138,10 +149,37 @@ void Player::update() {
 
   playerRect.x = xPos;
   playerRect.y = yPos;
+
+  maxHealthRect.x = xPos - (maxHealth / 4);
+  maxHealthRect.y = yPos - 50;
+
+  healthRect.x = maxHealthRect.x + 2;
+  healthRect.y = maxHealthRect.y + 2;
+  healthRect.w = health;
 }
 
-void Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
+bool Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
+  for(int i = 0; i < enemies->size(); i++) {
+    if((*enemies)[i].getX() + (*enemies)[i].getW() >= xPos &&
+       (*enemies)[i].getX() <= xPos + width &&
+       (*enemies)[i].getY() + (*enemies)[i].getH() >= yPos &&
+       (*enemies)[i].getY() <= yPos + height
+     ) {
+       // lastHit isn't set
+       if(lastHit == 0) {
+         lastHit = SDL_GetTicks();
+       }
+       // Only get hit every 80ms. Don't check if lastHit
+       // hasn't been set
+       if((lastHit != 0) && lastHit + 80 <= SDL_GetTicks()) {
+         health--;
+         lastHit = 0; // Reset lastHit
+         return true;
+       }
+     }
+  }
 
+  return false;
   // Covert angle to radians
   // float ang = angle * PI / 180;
   // int tempX, tempY;
@@ -204,7 +242,7 @@ void Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
   // }
 }
 
-void Player::draw(Graphics &graphics) {
+void Player::draw(Graphics &graphics, SDL_Rect cameraRect) {
 
   // Draw bullets before player
   for(int i = 0; i < bullets.size(); i++) {
@@ -216,10 +254,20 @@ void Player::draw(Graphics &graphics) {
     bullets[i].draw(graphics);
   }
 
+  SDL_Rect transRect = playerRect;
+  transRect.x = playerRect.x - cameraRect.x;
+  transRect.y = playerRect.y - cameraRect.y;
+
   int opposite = mouseY - yPos;
   int adjacent = mouseX - xPos;
   angle = atan2(opposite, adjacent) * 180 / PI;
-  SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &playerRect, angle, NULL, SDL_FLIP_NONE);
+  SDL_RenderCopyEx(graphics.getRenderer(), playerTex, NULL, &transRect, angle, NULL, SDL_FLIP_NONE);
+
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 20, 20, 20, 255);
+  SDL_RenderFillRect(graphics.getRenderer(), &maxHealthRect);
+
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 255, 0, 255);
+  SDL_RenderFillRect(graphics.getRenderer(), &healthRect);
 
   // Draw perp rects
   // SDL_SetRenderDrawColor(graphics.getRenderer(), 125, 255, 200, 255);

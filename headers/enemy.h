@@ -10,13 +10,15 @@ class Enemy {
 
 public:
   void init(Graphics &graphics, int x, int y);
-  void update(int playerX, int playerY);
+  void update(int playerX, int playerY, int playerW, int playerH);
   bool isHit(SDL_Rect bullRect);
-  void draw(Graphics &graphics);
+  void draw(Graphics &graphics, int playerX, int playerY, SDL_Rect cameraRect);
   void clean();
 
   int getX();
   int getY();
+  int getW();
+  int getH();
 
 private:
   int xPos, yPos, speed, health;

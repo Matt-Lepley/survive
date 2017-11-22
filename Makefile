@@ -150,6 +150,33 @@ src/bullet.cpp.s:
 	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/bullet.cpp.s
 .PHONY : src/bullet.cpp.s
 
+src/camera.o: src/camera.cpp.o
+
+.PHONY : src/camera.o
+
+# target to build an object file
+src/camera.cpp.o:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/camera.cpp.o
+.PHONY : src/camera.cpp.o
+
+src/camera.i: src/camera.cpp.i
+
+.PHONY : src/camera.i
+
+# target to preprocess a source file
+src/camera.cpp.i:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/camera.cpp.i
+.PHONY : src/camera.cpp.i
+
+src/camera.s: src/camera.cpp.s
+
+.PHONY : src/camera.s
+
+# target to generate assembly for a file
+src/camera.cpp.s:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/camera.cpp.s
+.PHONY : src/camera.cpp.s
+
 src/enemy.o: src/enemy.cpp.o
 
 .PHONY : src/enemy.o
@@ -285,6 +312,33 @@ src/player.cpp.s:
 	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
 
+src/quadtree.o: src/quadtree.cpp.o
+
+.PHONY : src/quadtree.o
+
+# target to build an object file
+src/quadtree.cpp.o:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/quadtree.cpp.o
+.PHONY : src/quadtree.cpp.o
+
+src/quadtree.i: src/quadtree.cpp.i
+
+.PHONY : src/quadtree.i
+
+# target to preprocess a source file
+src/quadtree.cpp.i:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/quadtree.cpp.i
+.PHONY : src/quadtree.cpp.i
+
+src/quadtree.s: src/quadtree.cpp.s
+
+.PHONY : src/quadtree.s
+
+# target to generate assembly for a file
+src/quadtree.cpp.s:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/quadtree.cpp.s
+.PHONY : src/quadtree.cpp.s
+
 src/survive.o: src/survive.cpp.o
 
 .PHONY : src/survive.o
@@ -324,6 +378,9 @@ help:
 	@echo "... src/bullet.o"
 	@echo "... src/bullet.i"
 	@echo "... src/bullet.s"
+	@echo "... src/camera.o"
+	@echo "... src/camera.i"
+	@echo "... src/camera.s"
 	@echo "... src/enemy.o"
 	@echo "... src/enemy.i"
 	@echo "... src/enemy.s"
@@ -339,6 +396,9 @@ help:
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
+	@echo "... src/quadtree.o"
+	@echo "... src/quadtree.i"
+	@echo "... src/quadtree.s"
 	@echo "... src/survive.o"
 	@echo "... src/survive.i"
 	@echo "... src/survive.s"

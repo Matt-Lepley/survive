@@ -8,6 +8,17 @@
 - [x] PLAYER
 - [x] SHOOTING
 - [x] ENEMIES
-- [ ] GAME STATES
-- [ ] MENUS
-- [ ] POWER UPS
+- [x] GAME STATES
+- [x] MENUS
+- [x] POWER UPS
+
+### Extras (No order)
+
+- [ ] Camera shaking
+- [ ] Audio / SFX
+- [ ] Explosion animation
+- [ ] Freeze powerup
+- [ ] Powerup timings
+- [ ] Powerup drop rates
+- [ ] collision detection
+- [ ] graphics overhaul

@@ -225,6 +225,54 @@ CMakeFiles/survive.dir/src/gameobject.cpp.o.provides: CMakeFiles/survive.dir/src
 CMakeFiles/survive.dir/src/gameobject.cpp.o.provides.build: CMakeFiles/survive.dir/src/gameobject.cpp.o
 
 
+CMakeFiles/survive.dir/src/quadtree.cpp.o: CMakeFiles/survive.dir/flags.make
+CMakeFiles/survive.dir/src/quadtree.cpp.o: src/quadtree.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/survive.dir/src/quadtree.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/quadtree.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/quadtree.cpp
+
+CMakeFiles/survive.dir/src/quadtree.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/survive.dir/src/quadtree.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lepley/Desktop/Apps/c++/Survive/src/quadtree.cpp > CMakeFiles/survive.dir/src/quadtree.cpp.i
+
+CMakeFiles/survive.dir/src/quadtree.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/survive.dir/src/quadtree.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lepley/Desktop/Apps/c++/Survive/src/quadtree.cpp -o CMakeFiles/survive.dir/src/quadtree.cpp.s
+
+CMakeFiles/survive.dir/src/quadtree.cpp.o.requires:
+
+.PHONY : CMakeFiles/survive.dir/src/quadtree.cpp.o.requires
+
+CMakeFiles/survive.dir/src/quadtree.cpp.o.provides: CMakeFiles/survive.dir/src/quadtree.cpp.o.requires
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/quadtree.cpp.o.provides.build
+.PHONY : CMakeFiles/survive.dir/src/quadtree.cpp.o.provides
+
+CMakeFiles/survive.dir/src/quadtree.cpp.o.provides.build: CMakeFiles/survive.dir/src/quadtree.cpp.o
+
+
+CMakeFiles/survive.dir/src/camera.cpp.o: CMakeFiles/survive.dir/flags.make
+CMakeFiles/survive.dir/src/camera.cpp.o: src/camera.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/survive.dir/src/camera.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/survive.dir/src/camera.cpp.o -c /home/lepley/Desktop/Apps/c++/Survive/src/camera.cpp
+
+CMakeFiles/survive.dir/src/camera.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/survive.dir/src/camera.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lepley/Desktop/Apps/c++/Survive/src/camera.cpp > CMakeFiles/survive.dir/src/camera.cpp.i
+
+CMakeFiles/survive.dir/src/camera.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/survive.dir/src/camera.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lepley/Desktop/Apps/c++/Survive/src/camera.cpp -o CMakeFiles/survive.dir/src/camera.cpp.s
+
+CMakeFiles/survive.dir/src/camera.cpp.o.requires:
+
+.PHONY : CMakeFiles/survive.dir/src/camera.cpp.o.requires
+
+CMakeFiles/survive.dir/src/camera.cpp.o.provides: CMakeFiles/survive.dir/src/camera.cpp.o.requires
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/camera.cpp.o.provides.build
+.PHONY : CMakeFiles/survive.dir/src/camera.cpp.o.provides
+
+CMakeFiles/survive.dir/src/camera.cpp.o.provides.build: CMakeFiles/survive.dir/src/camera.cpp.o
+
+
 # Object files for target survive
 survive_OBJECTS = \
 "CMakeFiles/survive.dir/src/enemy.cpp.o" \
@@ -233,7 +281,9 @@ survive_OBJECTS = \
 "CMakeFiles/survive.dir/src/game.cpp.o" \
 "CMakeFiles/survive.dir/src/graphics.cpp.o" \
 "CMakeFiles/survive.dir/src/bullet.cpp.o" \
-"CMakeFiles/survive.dir/src/gameobject.cpp.o"
+"CMakeFiles/survive.dir/src/gameobject.cpp.o" \
+"CMakeFiles/survive.dir/src/quadtree.cpp.o" \
+"CMakeFiles/survive.dir/src/camera.cpp.o"
 
 # External object files for target survive
 survive_EXTERNAL_OBJECTS =
@@ -245,9 +295,11 @@ survive: CMakeFiles/survive.dir/src/game.cpp.o
 survive: CMakeFiles/survive.dir/src/graphics.cpp.o
 survive: CMakeFiles/survive.dir/src/bullet.cpp.o
 survive: CMakeFiles/survive.dir/src/gameobject.cpp.o
+survive: CMakeFiles/survive.dir/src/quadtree.cpp.o
+survive: CMakeFiles/survive.dir/src/camera.cpp.o
 survive: CMakeFiles/survive.dir/build.make
 survive: CMakeFiles/survive.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable survive"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/lepley/Desktop/Apps/c++/Survive/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable survive"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/survive.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -262,6 +314,8 @@ CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/game.cpp.o.requires
 CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/graphics.cpp.o.requires
 CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/bullet.cpp.o.requires
 CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/gameobject.cpp.o.requires
+CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/quadtree.cpp.o.requires
+CMakeFiles/survive.dir/requires: CMakeFiles/survive.dir/src/camera.cpp.o.requires
 
 .PHONY : CMakeFiles/survive.dir/requires
 

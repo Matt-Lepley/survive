@@ -21,17 +21,25 @@ int Enemy::getY() {
   return yPos;
 }
 
-void Enemy::update(int playerX, int playerY){
-  if(playerX > xPos) {
+int Enemy::getH() {
+  return height;
+}
+
+int Enemy::getW() {
+  return width;
+}
+
+void Enemy::update(int playerX, int playerY, int playerW, int playerH){
+  if(playerX + (playerW / 2) > xPos) {
     xPos+=speed;
   }
-  if(playerX < xPos) {
+  if(playerX + (playerW / 2) < xPos) {
     xPos-=speed;
   }
-  if(playerY > yPos) {
+  if(playerY + (playerH / 2) > yPos) {
     yPos+=speed;
   }
-  if(playerY < yPos) {
+  if(playerY + (playerH / 2) < yPos) {
     yPos-=speed;
   }
 
@@ -50,8 +58,18 @@ bool Enemy::isHit(SDL_Rect bullRect) {
   return false;
 }
 
-void Enemy::draw(Graphics &graphics){
-  SDL_RenderCopy(graphics.getRenderer(), enemyTex, NULL, &enemyRect);
+void Enemy::draw(Graphics &graphics, int playerX, int playerY, SDL_Rect cameraRect){
+
+  SDL_Rect transRect = enemyRect;
+  transRect.x = enemyRect.x - cameraRect.x;
+  transRect.y = enemyRect.y - cameraRect.y;
+
+  int opposite = playerY - yPos;
+  int adjacent = playerX - xPos;
+  float angle = atan2(opposite, adjacent) * 180 / PI;
+  SDL_RenderCopyEx(graphics.getRenderer(), enemyTex, NULL, &transRect, angle, NULL, SDL_FLIP_NONE);
+
+  // SDL_RenderCopy(graphics.getRenderer(), enemyTex, NULL, &enemyRect);
 
   // int tempX, tempY;
   // vector<pair<int, int>> coords = {};

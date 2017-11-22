@@ -6,6 +6,7 @@
 #include "player.h"
 #include "enemy.h"
 #include "gameobject.h"
+#include "camera.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -56,6 +57,7 @@ private:
 
   // Objects
   Graphics graphics;
+  Camera camera;
   Player player;
   vector<Enemy> enemies = {};
   vector<Gameobject> drops = {};

@@ -56,7 +56,8 @@ bool Game::shouldDropItem() {
   uniform_int_distribution<int> dis(1, 100);
 
   // 15% chance to drop item
-  return dis(gen) < 15 ? true : false;
+  // return dis(gen) < 15 ? true : false;
+  return true;
 }
 
 int Game::itemDropType() {
@@ -157,7 +158,7 @@ void Game::gameloop() {
   generateEnemies();
 
   player.update();
-  player.draw(graphics);
+  player.draw(graphics, camera.getRect());
   for(int i = 0; i < enemies.size(); i++) {
     for(int j = 0; j < player.getBullets().size(); j++) {
       if(enemies[i].isHit(player.getBullets()[j].getRect())) {
@@ -167,18 +168,28 @@ void Game::gameloop() {
         player.destroyBullet(j);
       }
     }
-    enemies[i].update(player.getXPos(), player.getYPos());
-    enemies[i].draw(graphics);
+    enemies[i].update(player.getXPos(), player.getYPos(), player.getW(), player.getH());
+    enemies[i].draw(graphics, player.getXPos(), player.getYPos(), camera.getRect());
   }
 
-  player.enemyCollision(graphics, &enemies);
+  if(player.enemyCollision(graphics, &enemies)) {
+      //camera.setRect(10);
+      // SHOW REDISH SCREEN
+  }
 
   for(int i = 0; i < drops.size(); i++) {
     if(player.collision(drops[i], &enemies)) {
+      if(drops[i].getDropValue() == DROPS::Nuke) {
+        camera.shake();
+      }
       drops.erase(drops.begin() + i);
     } else {
       drops[i].draw(graphics);  // Only draw if player hasn't picked up
     }
+  }
+
+  if(camera.getShaking()) {
+    camera.shake();
   }
 
   SDL_RenderPresent(graphics.getRenderer());

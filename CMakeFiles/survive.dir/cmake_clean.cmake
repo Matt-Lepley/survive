@@ -6,6 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/survive.dir/src/graphics.cpp.o"
   "CMakeFiles/survive.dir/src/bullet.cpp.o"
   "CMakeFiles/survive.dir/src/gameobject.cpp.o"
+  "CMakeFiles/survive.dir/src/quadtree.cpp.o"
+  "CMakeFiles/survive.dir/src/camera.cpp.o"
   "survive.pdb"
   "survive"
 )

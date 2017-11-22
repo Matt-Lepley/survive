@@ -18,16 +18,19 @@ public:
   void shoot(int mouseX, int mouseY);
   void destroyBullet(int index);
   void update();
-  void draw(Graphics &graphics);
+  void draw(Graphics &graphics, SDL_Rect cameraRect);
   void clean();
 
   int getXPos();
   int getYPos();
+  int getW();
+  int getH();
+
   void setMouseX(int x);
   void setMouseY(int y);
   bool collision(Gameobject obj, vector<Enemy>* enemies);
   bool outOfBounds();
-  void enemyCollision(Graphics &graphics, vector<Enemy> *enemies);
+  bool enemyCollision(Graphics &graphics, vector<Enemy> *enemies);
   void handleBuff(int value, vector<Enemy>* enemies);
   void alterSpeed();
   void nuke(vector<Enemy>* enemies);
@@ -40,11 +43,15 @@ private:
   int width = 50;
   int height = 50;
   int mouseX, mouseY;
+  int lastHit = 0;
+  int maxHealth;
 
   vector<Bullet> bullets = {};
 
   SDL_Event event;
   SDL_Rect playerRect;
+  SDL_Rect healthRect;
+  SDL_Rect maxHealthRect;
   SDL_Surface *playerSurface;
   SDL_Texture *playerTex;
 };

@@ -6,6 +6,11 @@ CMakeFiles/survive.dir/src/bullet.cpp.o: headers/bullet.h
 CMakeFiles/survive.dir/src/bullet.cpp.o: headers/globals.h
 CMakeFiles/survive.dir/src/bullet.cpp.o: headers/graphics.h
 
+CMakeFiles/survive.dir/src/camera.cpp.o: src/camera.cpp
+CMakeFiles/survive.dir/src/camera.cpp.o: headers/camera.h
+CMakeFiles/survive.dir/src/camera.cpp.o: headers/globals.h
+CMakeFiles/survive.dir/src/camera.cpp.o: headers/graphics.h
+
 CMakeFiles/survive.dir/src/enemy.cpp.o: src/enemy.cpp
 CMakeFiles/survive.dir/src/enemy.cpp.o: headers/enemy.h
 CMakeFiles/survive.dir/src/enemy.cpp.o: headers/globals.h
@@ -13,6 +18,7 @@ CMakeFiles/survive.dir/src/enemy.cpp.o: headers/graphics.h
 
 CMakeFiles/survive.dir/src/game.cpp.o: src/game.cpp
 CMakeFiles/survive.dir/src/game.cpp.o: headers/bullet.h
+CMakeFiles/survive.dir/src/game.cpp.o: headers/camera.h
 CMakeFiles/survive.dir/src/game.cpp.o: headers/enemy.h
 CMakeFiles/survive.dir/src/game.cpp.o: headers/game.h
 CMakeFiles/survive.dir/src/game.cpp.o: headers/gameobject.h
@@ -37,8 +43,15 @@ CMakeFiles/survive.dir/src/player.cpp.o: headers/globals.h
 CMakeFiles/survive.dir/src/player.cpp.o: headers/graphics.h
 CMakeFiles/survive.dir/src/player.cpp.o: headers/player.h
 
+CMakeFiles/survive.dir/src/quadtree.cpp.o: src/quadtree.cpp
+CMakeFiles/survive.dir/src/quadtree.cpp.o: headers/enemy.h
+CMakeFiles/survive.dir/src/quadtree.cpp.o: headers/globals.h
+CMakeFiles/survive.dir/src/quadtree.cpp.o: headers/graphics.h
+CMakeFiles/survive.dir/src/quadtree.cpp.o: headers/quadtree.h
+
 CMakeFiles/survive.dir/src/survive.cpp.o: src/survive.cpp
 CMakeFiles/survive.dir/src/survive.cpp.o: headers/bullet.h
+CMakeFiles/survive.dir/src/survive.cpp.o: headers/camera.h
 CMakeFiles/survive.dir/src/survive.cpp.o: headers/enemy.h
 CMakeFiles/survive.dir/src/survive.cpp.o: headers/game.h
 CMakeFiles/survive.dir/src/survive.cpp.o: headers/gameobject.h
