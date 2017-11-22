@@ -85,6 +85,16 @@ void Game::handleEvents() {
 			gameIsRunning = false;
 		}
 
+    if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_p) {
+      if(gamestate == GAMESTATES::Playing) {
+        cout << "PLAYING" << endl;
+        gamestate = GAMESTATES::StartMenu;
+      } else {
+        cout << "MENU" << endl;
+        gamestate = GAMESTATES::Playing;
+      }
+    }
+
     if(event.type == SDL_MOUSEMOTION) {
       player.setMouseX(event.button.x);
       player.setMouseY(event.button.y);
@@ -100,6 +110,7 @@ void Game::handleEvents() {
              event.button.y > startGameRect.y &&
              event.button.y < startGameRect.y + startGameRect.h) {
                gamestate = GAMESTATES::Playing;
+               return;
           }
 
           if(event.button.x > quitGameRect.x &&
