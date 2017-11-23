@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <cmath>
+#include <SDL2/SDL_mixer.h>
 
 class Player {
 
@@ -39,12 +40,17 @@ public:
 
 private:
   int xPos, yPos, speed, health;
+  int baseSpeed = 3;
   float angle = 0;
   int width = 50;
   int height = 50;
   int mouseX, mouseY;
   int lastHit = 0;
   int maxHealth;
+
+  int startedDoubleSpeed = 0;
+  int doubleSpeedDuration = 4000;
+  bool doubleSpeed = false;
 
   vector<Bullet> bullets = {};
 
@@ -54,6 +60,8 @@ private:
   SDL_Rect maxHealthRect;
   SDL_Surface *playerSurface;
   SDL_Texture *playerTex;
+
+  Mix_Chunk *doubleSpeedChunk = NULL;
 };
 
 #endif

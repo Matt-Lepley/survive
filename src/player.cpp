@@ -4,7 +4,7 @@ void Player::init(Graphics &graphics) {
   cout << "initializing player.." << endl;
   xPos = (SCREEN_WIDTH / 2) - (width / 2);
   yPos = (SCREEN_HEIGHT / 2) - (height / 2);
-  speed = 3;
+  speed = baseSpeed;
   health = 100;
   maxHealth = health;
 
@@ -18,6 +18,8 @@ void Player::init(Graphics &graphics) {
   playerSurface = IMG_Load("player.png");
   playerTex = SDL_CreateTextureFromSurface(graphics.getRenderer(), playerSurface);
   SDL_FreeSurface(playerSurface);
+
+  doubleSpeedChunk = Mix_LoadWAV("doubleSpeed.wav");
 
   cout << "done initializing player!" << endl;
 }
@@ -100,8 +102,18 @@ void Player::handleBuff(int value, vector<Enemy>* enemies) {
 
 // Figure out timer for speed buffs
 void Player::alterSpeed() {
-  if(speed == 3) {
-    speed *= 2;
+  if(!doubleSpeed) {
+    Mix_PlayChannel(-1, doubleSpeedChunk, 0);
+    startedDoubleSpeed = SDL_GetTicks();
+    doubleSpeed = true;
+  }
+
+  if(doubleSpeed && startedDoubleSpeed + doubleSpeedDuration > SDL_GetTicks()) {
+    speed = baseSpeed * 2;
+  }
+
+  if(doubleSpeed && startedDoubleSpeed + doubleSpeedDuration <= SDL_GetTicks()) {
+    doubleSpeed = false;
   }
 }
 
@@ -284,5 +296,6 @@ void Player::draw(Graphics &graphics, SDL_Rect cameraRect) {
 
 void Player::clean() {
   SDL_DestroyTexture(playerTex);
+  Mix_FreeChunk(doubleSpeedChunk);
   cout << "Cleaned up player..." << endl;
 }
