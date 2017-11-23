@@ -55,6 +55,8 @@ graphics.h
 headers/graphics.h
 SDL2/SDL.h
 -
+SDL2/SDL_mixer.h
+-
 random
 -
 iostream

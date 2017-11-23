@@ -5,6 +5,7 @@
 #include "graphics.h"
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include <random>
 #include <iostream>
 using namespace std;
@@ -13,10 +14,11 @@ class Camera {
 
 public:
 
-	Camera();
+	void init();
 	void draw(Graphics &graphics);
 	void shake();
 	bool getShaking();
+	void clean();
 	SDL_Rect getRect();
 
 private:
@@ -24,6 +26,8 @@ private:
 	int startedShaking  = 0;
 	int shakeDuration = 750;
 	bool shaking = false;
+
+	Mix_Chunk *nuke = NULL;
 };
 
 #endif

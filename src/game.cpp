@@ -4,6 +4,7 @@ void Game::init() {
   cout << "initializing game.." << endl;
   populateSpawnPoints();
   graphics.init();
+  camera.init();
   player.init(graphics);
   cout << "done initializing game!" << endl;
 }
@@ -205,6 +206,7 @@ bool Game::isRunning() {
 void Game::clean() {
   player.clean();
   graphics.clean();
+  camera.clean();
 }
 
 void Game::populateSpawnPoints() {
