@@ -24,6 +24,7 @@ src/bullet.cpp
 src/gameobject.cpp
 src/quadtree.cpp
 src/camera.cpp
+src/powerup.cpp
 )
 
 include_directories(
