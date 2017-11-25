@@ -5,19 +5,20 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+using namespace std;
 
 class Powerup {
 
 public:
   void init(int val, int duration, string file);
-  void timeleft();
+  int timeleft();
   void clean();
 
 private:
   int value; // Global enum
   int timerDuration;
   int timerStart;
-  Mus_Chunk *sound = NULL;
+  Mix_Chunk *sound = NULL;
   bool hasPowerup = false;
 };
 

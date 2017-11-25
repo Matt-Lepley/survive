@@ -43,6 +43,10 @@ CMakeFiles/survive.dir/src/player.cpp.o
  headers/globals.h
  headers/graphics.h
  headers/player.h
+CMakeFiles/survive.dir/src/powerup.cpp.o
+ /home/lepley/Desktop/Apps/c++/Survive/src/powerup.cpp
+ headers/globals.h
+ headers/powerup.h
 CMakeFiles/survive.dir/src/quadtree.cpp.o
  /home/lepley/Desktop/Apps/c++/Survive/src/quadtree.cpp
  headers/enemy.h

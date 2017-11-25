@@ -34,6 +34,10 @@ graphics.h
 player.h
 /home/lepley/Desktop/Apps/c++/Survive/src/player.h
 
+/home/lepley/Desktop/Apps/c++/Survive/src/powerup.cpp
+powerup.h
+/home/lepley/Desktop/Apps/c++/Survive/src/powerup.h
+
 /home/lepley/Desktop/Apps/c++/Survive/src/quadtree.cpp
 quadtree.h
 /home/lepley/Desktop/Apps/c++/Survive/src/quadtree.h
@@ -128,6 +132,16 @@ headers/enemy.h
 vector
 -
 cmath
+-
+SDL2/SDL_mixer.h
+-
+
+headers/powerup.h
+globals.h
+headers/globals.h
+string
+-
+SDL2/SDL.h
 -
 SDL2/SDL_mixer.h
 -

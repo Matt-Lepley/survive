@@ -312,6 +312,33 @@ src/player.cpp.s:
 	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
 
+src/powerup.o: src/powerup.cpp.o
+
+.PHONY : src/powerup.o
+
+# target to build an object file
+src/powerup.cpp.o:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/powerup.cpp.o
+.PHONY : src/powerup.cpp.o
+
+src/powerup.i: src/powerup.cpp.i
+
+.PHONY : src/powerup.i
+
+# target to preprocess a source file
+src/powerup.cpp.i:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/powerup.cpp.i
+.PHONY : src/powerup.cpp.i
+
+src/powerup.s: src/powerup.cpp.s
+
+.PHONY : src/powerup.s
+
+# target to generate assembly for a file
+src/powerup.cpp.s:
+	$(MAKE) -f CMakeFiles/survive.dir/build.make CMakeFiles/survive.dir/src/powerup.cpp.s
+.PHONY : src/powerup.cpp.s
+
 src/quadtree.o: src/quadtree.cpp.o
 
 .PHONY : src/quadtree.o
@@ -396,6 +423,9 @@ help:
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
+	@echo "... src/powerup.o"
+	@echo "... src/powerup.i"
+	@echo "... src/powerup.s"
 	@echo "... src/quadtree.o"
 	@echo "... src/quadtree.i"
 	@echo "... src/quadtree.s"

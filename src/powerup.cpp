@@ -3,7 +3,7 @@
 void Powerup::init(int val, int duration, string file) {
   value = val;
   timerDuration = duration;
-  sound = Mix_LoadWAV(file.to_cstr());
+  sound = Mix_LoadWAV(file.c_str());
   Mix_PlayChannel(-1, sound, 0);
 }
 
