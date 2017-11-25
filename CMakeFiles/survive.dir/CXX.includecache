@@ -129,6 +129,8 @@ gameobject.h
 headers/gameobject.h
 enemy.h
 headers/enemy.h
+powerup.h
+headers/powerup.h
 vector
 -
 cmath
@@ -140,6 +142,12 @@ headers/powerup.h
 globals.h
 headers/globals.h
 string
+-
+array
+-
+vector
+-
+iostream
 -
 SDL2/SDL.h
 -

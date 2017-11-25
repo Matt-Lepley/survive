@@ -25,7 +25,7 @@ bool Camera::getShaking() {
 
 void Camera::shake() {
 	if(!shaking) {
-		Mix_PlayChannel(-1, nuke, 0);
+		//Mix_PlayChannel(-1, nuke, 0);
 		startedShaking = SDL_GetTicks();
 		shaking = true;
 	}

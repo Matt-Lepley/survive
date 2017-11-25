@@ -1,9 +1,10 @@
 #include "powerup.h"
 
-void Powerup::init(int val, int duration, string file) {
+void Powerup::init(int val) {
   value = val;
-  timerDuration = duration;
-  sound = Mix_LoadWAV(file.c_str());
+  timerStart = SDL_GetTicks();
+  timerDuration = durations[value];
+  sound = Mix_LoadWAV(sounds[value].c_str());
   Mix_PlayChannel(-1, sound, 0);
 }
 

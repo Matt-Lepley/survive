@@ -86,6 +86,10 @@ bool Player::collision(Gameobject obj, vector<Enemy>* enemies) {
      tempR.y + tempR.h > playerRect.y &&
      tempR.y < playerRect.y + playerRect.h) {
        handleBuff(obj.getDropValue(), enemies);
+       Powerup p;
+       p.init(obj.getDropValue());
+
+       p.clean();
        return true;
      }
   return false;

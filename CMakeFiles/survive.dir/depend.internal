@@ -26,6 +26,7 @@ CMakeFiles/survive.dir/src/game.cpp.o
  headers/globals.h
  headers/graphics.h
  headers/player.h
+ headers/powerup.h
 CMakeFiles/survive.dir/src/gameobject.cpp.o
  /home/lepley/Desktop/Apps/c++/Survive/src/gameobject.cpp
  headers/gameobject.h
@@ -43,6 +44,7 @@ CMakeFiles/survive.dir/src/player.cpp.o
  headers/globals.h
  headers/graphics.h
  headers/player.h
+ headers/powerup.h
 CMakeFiles/survive.dir/src/powerup.cpp.o
  /home/lepley/Desktop/Apps/c++/Survive/src/powerup.cpp
  headers/globals.h
@@ -63,3 +65,4 @@ CMakeFiles/survive.dir/src/survive.cpp.o
  headers/globals.h
  headers/graphics.h
  headers/player.h
+ headers/powerup.h

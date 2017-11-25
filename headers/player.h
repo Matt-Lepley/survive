@@ -6,6 +6,7 @@
 #include "globals.h"
 #include "gameobject.h"
 #include "enemy.h"
+#include "powerup.h"
 
 #include <vector>
 #include <cmath>
@@ -53,6 +54,7 @@ private:
   bool doubleSpeed = false;
 
   vector<Bullet> bullets = {};
+  vector<Powerup> powerups = {};
 
   SDL_Event event;
   SDL_Rect playerRect;
