@@ -16,6 +16,10 @@ int Powerup::timeleft() {
   }
 }
 
+int Powerup::getValue() {
+  return value;
+}
+
 void Powerup::clean() {
   Mix_FreeChunk(sound);
 }

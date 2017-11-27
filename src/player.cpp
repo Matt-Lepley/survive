@@ -44,6 +44,14 @@ int Player::getH() {
   return height;
 }
 
+SDL_Rect *Player::getDoubleSpeedTimerRect() {
+  return &doubleSpeedTimerRect;
+}
+
+SDL_Rect *Player::getNukeTimerRect() {
+  return &nukeTimerRect;
+}
+
 vector<Bullet> Player::getBullets() {
   return bullets;
 }
@@ -85,14 +93,38 @@ bool Player::collision(Gameobject obj, vector<Enemy>* enemies) {
      tempR.x < playerRect.x + playerRect.w &&
      tempR.y + tempR.h > playerRect.y &&
      tempR.y < playerRect.y + playerRect.h) {
-       handleBuff(obj.getDropValue(), enemies);
-       Powerup p;
-       p.init(obj.getDropValue());
+       //handleBuff(obj.getDropValue(), enemies);
 
-       p.clean();
+
+       removeDuplicatePowerups(obj.getDropValue());
+       Powerup pu;
+       pu.init(obj.getDropValue());
+       powerups.push_back(pu);
+       cout << powerups.size() << endl;
+
        return true;
      }
   return false;
+}
+
+void Player::removeDuplicatePowerups(int value) {
+  for(int i = 0; i < powerups.size(); i++) {
+    if(powerups[i].getValue() == value) {
+      powerups[i].clean();
+      powerups.erase(powerups.begin() + i);
+    }
+  }
+}
+
+void Player::handlePowerups() {
+  for(int i = 0; i < powerups.size(); i++) {
+    if(powerups[i].timeleft() == 0) {
+      powerups[i].clean();
+      powerups.erase(powerups.begin() + i);
+    } else {
+      // cout << powerups[i].timeleft() << endl;
+    }
+  }
 }
 
 void Player::handleBuff(int value, vector<Enemy>* enemies) {

@@ -159,6 +159,7 @@ void Game::gameloop() {
   generateEnemies();
 
   player.update();
+  player.handlePowerups();
   player.draw(graphics, camera.getRect());
   for(int i = 0; i < enemies.size(); i++) {
     for(int j = 0; j < player.getBullets().size(); j++) {
@@ -172,6 +173,11 @@ void Game::gameloop() {
     enemies[i].update(player.getXPos(), player.getYPos(), player.getW(), player.getH());
     enemies[i].draw(graphics, player.getXPos(), player.getYPos(), camera.getRect());
   }
+
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 255,0,0,255);
+  SDL_RenderFillRect(graphics.getRenderer(), player.getNukeTimerRect());
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 0,0,255,255);
+  SDL_RenderFillRect(graphics.getRenderer(), player.getDoubleSpeedTimerRect());
 
   if(player.enemyCollision(graphics, &enemies)) {
       //camera.setRect(10);

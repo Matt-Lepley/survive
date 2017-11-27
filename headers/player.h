@@ -34,10 +34,14 @@ public:
   bool outOfBounds();
   bool enemyCollision(Graphics &graphics, vector<Enemy> *enemies);
   void handleBuff(int value, vector<Enemy>* enemies);
+  void handlePowerups();
   void alterSpeed();
   void nuke(vector<Enemy>* enemies);
+  void removeDuplicatePowerups(int value);
 
   vector<Bullet> getBullets();
+  SDL_Rect *getDoubleSpeedTimerRect();
+  SDL_Rect *getNukeTimerRect();
 
 private:
   int xPos, yPos, speed, health;
@@ -55,6 +59,8 @@ private:
 
   vector<Bullet> bullets = {};
   vector<Powerup> powerups = {};
+  SDL_Rect doubleSpeedTimerRect = {20,20,200,20};
+  SDL_Rect nukeTimerRect = {20,60,200,20};
 
   SDL_Event event;
   SDL_Rect playerRect;

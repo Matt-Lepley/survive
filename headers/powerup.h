@@ -17,6 +17,8 @@ public:
   int timeleft();
   void clean();
 
+  int getValue();
+
 private:
   int value; // Global enum
   int timerDuration;
@@ -24,7 +26,7 @@ private:
   Mix_Chunk *sound = NULL;
   bool hasPowerup = false;
   array<string, 2> sounds = {{"doubleSpeed.wav","nuke.wav"}};
-  array<int, 2> durations = {{750, 2000}};
+  array<int, 2> durations = {{2000, 2000}};
 };
 
 #endif
