@@ -63,7 +63,10 @@ private:
   SDL_Rect doubleSpeedTimerRect = {20,20,200,20};
   SDL_Rect nukeTimerRect = {20,60,200,20};
 
-  array<SDL_Rect, 2> timerRects = {{ doubleSpeedTimerRect, nukeTimerRect }};
+  array<SDL_Rect, 2> timerRects = {{
+    doubleSpeedTimerRect,
+    nukeTimerRect
+  }};
 
   SDL_Event event;
   SDL_Rect playerRect;
