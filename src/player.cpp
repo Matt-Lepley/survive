@@ -11,9 +11,19 @@ void Player::init(Graphics &graphics) {
   mouseX = xPos;
   mouseY = yPos;
 
+  // Set Rects
   playerRect = {xPos, yPos, width, height};
   healthRect = {xPos - (health / 2), yPos - 50, health, 10};
   maxHealthRect = {healthRect.x - 2, healthRect.y - 2, healthRect.w + 4, healthRect.h + 4};
+
+  maxHealthRect.h = 34;
+
+  for(int i = 0; i < timerRects.size(); i++) {
+    timerRects[i].x = maxHealthRect.x;
+    timerRects[i].y = maxHealthRect.y + (10 * (i+1));
+    timerRects[i].w = 0;
+    timerRects[i].h = 10;
+  }
 
   playerSurface = IMG_Load("player.png");
   playerTex = SDL_CreateTextureFromSurface(graphics.getRenderer(), playerSurface);
@@ -122,10 +132,11 @@ void Player::handlePowerups() {
       powerups[i].clean();
       powerups.erase(powerups.begin() + i);
       // doubleSpeedTimerRect.w = 0;
+      timerRects[powerups[i].getValue()].w = 0;
     } else {
       // cout << powerups[i].timeleft() << endl;
       cout << timerRects[powerups[i].getValue()].w << endl;
-      timerRects[powerups[i].getValue()].w = powerups[i].timeleft() / 10;
+      timerRects[powerups[i].getValue()].w = (float)powerups[i].timeleft() / (float)2000 * 100;
       // if(powerups[i].getValue() == 0) {
       //   doubleSpeedTimerRect.w = powerups[i].timeleft() / 10;
       // }
@@ -210,6 +221,11 @@ void Player::update() {
   healthRect.x = maxHealthRect.x + 2;
   healthRect.y = maxHealthRect.y + 2;
   healthRect.w = health;
+
+  for(int i = 0; i < timerRects.size(); i++) {
+    timerRects[i].x = maxHealthRect.x + 2;
+    timerRects[i].y = maxHealthRect.y + (10 * (i+1) + 2);
+  }
 }
 
 bool Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {

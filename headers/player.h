@@ -54,14 +54,14 @@ private:
   int lastHit = 0;
   int maxHealth;
 
-  int startedDoubleSpeed = 0;
-  int doubleSpeedDuration = 4000;
+  int startedDoubleSpeed = 2000;
+  int doubleSpeedDuration = 2000;
   bool doubleSpeed = false;
 
   vector<Bullet> bullets = {};
   vector<Powerup> powerups = {};
-  SDL_Rect doubleSpeedTimerRect = {20,20,200,20};
-  SDL_Rect nukeTimerRect = {20,60,200,20};
+  SDL_Rect doubleSpeedTimerRect;
+  SDL_Rect nukeTimerRect;
 
   array<SDL_Rect, 2> timerRects = {{
     doubleSpeedTimerRect,
