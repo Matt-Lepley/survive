@@ -45,11 +45,11 @@ int Player::getH() {
 }
 
 SDL_Rect *Player::getDoubleSpeedTimerRect() {
-  return &doubleSpeedTimerRect;
+  return &timerRects[0];
 }
 
 SDL_Rect *Player::getNukeTimerRect() {
-  return &nukeTimerRect;
+  return &timerRects[1];
 }
 
 vector<Bullet> Player::getBullets() {
@@ -121,8 +121,14 @@ void Player::handlePowerups() {
     if(powerups[i].timeleft() == 0) {
       powerups[i].clean();
       powerups.erase(powerups.begin() + i);
+      // doubleSpeedTimerRect.w = 0;
     } else {
       // cout << powerups[i].timeleft() << endl;
+      cout << timerRects[powerups[i].getValue()].w << endl;
+      timerRects[powerups[i].getValue()].w = powerups[i].timeleft() / 10;
+      // if(powerups[i].getValue() == 0) {
+      //   doubleSpeedTimerRect.w = powerups[i].timeleft() / 10;
+      // }
     }
   }
 }
