@@ -19,7 +19,9 @@
 - [X] Explosion animation
 - [X] Freeze powerup
 - [X] Powerup timings
-- [ ] Powerup drop rates
+- [X] Powerup drop rates
 - [ ] better collision detection
 - [ ] graphics overhaul
 - [ ] Unfreeze enemies on new wave
+- [ ] Death gamestate
+- [ ] SFX for shooting
