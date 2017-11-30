@@ -38,6 +38,7 @@ public:
   void handlePowerups();
   void alterSpeed();
   void nuke(vector<Enemy>* enemies);
+  void freezeEnemies();
   void removeDuplicatePowerups(int value);
 
   vector<Bullet> getBullets();
@@ -75,7 +76,7 @@ private:
   SDL_Surface *playerSurface;
   SDL_Texture *playerTex;
 
-  Mix_Chunk *doubleSpeedChunk = NULL;
+  Mix_Chunk *damageFromEnemyChunk = NULL;
 };
 
 #endif

@@ -25,8 +25,8 @@ private:
   int timerStart;
   Mix_Chunk *sound = NULL;
   bool hasPowerup = false;
-  array<string, 2> sounds = {{"doubleSpeed.wav","nuke.wav"}};
-  array<int, 2> durations = {{2000, 2000}};
+  array<string, 3> sounds = {{"doubleSpeed.wav", "nuke.wav", "freeze2x.wav"}};
+  array<int, 3> durations = {{6000, 2000, 2000}};
 };
 
 #endif

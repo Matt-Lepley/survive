@@ -8,6 +8,7 @@ const float PI = 3.14159265;
 enum DROPS {
   DoubleSpeed,
   Nuke,
+  Freeze,
   NUM_DROPS
 };
 

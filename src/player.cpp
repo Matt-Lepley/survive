@@ -29,7 +29,7 @@ void Player::init(Graphics &graphics) {
   playerTex = SDL_CreateTextureFromSurface(graphics.getRenderer(), playerSurface);
   SDL_FreeSurface(playerSurface);
 
-  doubleSpeedChunk = Mix_LoadWAV("doubleSpeed.wav");
+  damageFromEnemyChunk = Mix_LoadWAV("damage.ogg");
 
   cout << "done initializing player!" << endl;
 }
@@ -103,14 +103,12 @@ bool Player::collision(Gameobject obj, vector<Enemy>* enemies) {
      tempR.x < playerRect.x + playerRect.w &&
      tempR.y + tempR.h > playerRect.y &&
      tempR.y < playerRect.y + playerRect.h) {
-       //handleBuff(obj.getDropValue(), enemies);
-
+      //  handleBuff(obj.getDropValue(), enemies);
 
        removeDuplicatePowerups(obj.getDropValue());
        Powerup pu;
        pu.init(obj.getDropValue());
        powerups.push_back(pu);
-       cout << powerups.size() << endl;
 
        return true;
      }
@@ -131,15 +129,9 @@ void Player::handlePowerups() {
     if(powerups[i].timeleft() == 0) {
       powerups[i].clean();
       powerups.erase(powerups.begin() + i);
-      // doubleSpeedTimerRect.w = 0;
       timerRects[powerups[i].getValue()].w = 0;
     } else {
-      // cout << powerups[i].timeleft() << endl;
-      cout << timerRects[powerups[i].getValue()].w << endl;
       timerRects[powerups[i].getValue()].w = (float)powerups[i].timeleft() / (float)2000 * 100;
-      // if(powerups[i].getValue() == 0) {
-      //   doubleSpeedTimerRect.w = powerups[i].timeleft() / 10;
-      // }
     }
   }
 }
@@ -151,12 +143,19 @@ void Player::handleBuff(int value, vector<Enemy>* enemies) {
   if(value == DROPS::Nuke) {
     nuke(enemies);
   }
+  if(value == DROPS::Freeze) {
+    freezeEnemies();
+  }
+}
+
+void Player::freezeEnemies() {
+  cout << "FREEZING" << endl;
 }
 
 // Figure out timer for speed buffs
 void Player::alterSpeed() {
+  cout << "NOT HAPPENING" << endl;
   if(!doubleSpeed) {
-    Mix_PlayChannel(-1, doubleSpeedChunk, 0);
     startedDoubleSpeed = SDL_GetTicks();
     doubleSpeed = true;
   }
@@ -171,7 +170,6 @@ void Player::alterSpeed() {
 }
 
 void Player::nuke(vector<Enemy>* enemies) {
-  cout << "DIE ALLL" << endl;
   enemies->clear();
 }
 
@@ -239,10 +237,11 @@ bool Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
        if(lastHit == 0) {
          lastHit = SDL_GetTicks();
        }
-       // Only get hit every 80ms. Don't check if lastHit
+       // Only get hit every 500ms. Don't check if lastHit
        // hasn't been set
-       if((lastHit != 0) && lastHit + 80 <= SDL_GetTicks()) {
-         health--;
+       if((lastHit != 0) && lastHit + 500 <= SDL_GetTicks()) {
+         health -= 5;
+         Mix_PlayChannelTimed(-1, damageFromEnemyChunk, 0, 1000);
          lastHit = 0; // Reset lastHit
          return true;
        }
@@ -354,6 +353,6 @@ void Player::draw(Graphics &graphics, SDL_Rect cameraRect) {
 
 void Player::clean() {
   SDL_DestroyTexture(playerTex);
-  Mix_FreeChunk(doubleSpeedChunk);
+  Mix_FreeChunk(damageFromEnemyChunk);
   cout << "Cleaned up player..." << endl;
 }

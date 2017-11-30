@@ -9,9 +9,11 @@ void Gameobject::init(int dropValue, int eX, int eY) {
 
 void Gameobject::draw(Graphics &graphics) {
   if(value == DROPS::DoubleSpeed) {
-    SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 100, 255);
+    SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 100, 0, 255);
   } else if(value == DROPS::Nuke) {
     SDL_SetRenderDrawColor(graphics.getRenderer(), 100, 0, 100, 255);
+  } else if(value == DROPS::Freeze) {
+    SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 100, 255);
   }
   SDL_RenderFillRect(graphics.getRenderer(), &objRect);
 }
