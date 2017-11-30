@@ -49,8 +49,7 @@ private:
   int CURRENT_TIME, ELAPSED_TIME;
 
   bool gameIsRunning = true;
-
-
+  
   SDL_Event event;
   SDL_Rect screenRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
   SDL_Rect startGameRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 - 50, 300, 100};

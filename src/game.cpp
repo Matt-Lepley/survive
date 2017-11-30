@@ -57,8 +57,7 @@ bool Game::shouldDropItem() {
   uniform_int_distribution<int> dis(1, 100);
 
   // 15% chance to drop item
-  // return dis(gen) < 15 ? true : false;
-  return true;
+  return dis(gen) < 15 ? true : false;
 }
 
 int Game::itemDropType() {
