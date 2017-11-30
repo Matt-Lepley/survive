@@ -1,6 +1,6 @@
 ## Survive
 
-#### (Speed creation - 8 hours)
+#### Basics
 
 - [x] WINDOW
 - [x] GAME LOOP
@@ -14,11 +14,12 @@
 
 ### Extras (No order)
 
-- [ ] Camera shaking
-- [ ] Audio / SFX
-- [ ] Explosion animation
-- [ ] Freeze powerup
-- [ ] Powerup timings
+- [X] Camera shaking
+- [X] Audio / SFX
+- [X] Explosion animation
+- [X] Freeze powerup
+- [X] Powerup timings
 - [ ] Powerup drop rates
-- [ ] collision detection
+- [ ] better collision detection
 - [ ] graphics overhaul
+- [ ] Unfreeze enemies on new wave

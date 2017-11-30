@@ -33,17 +33,22 @@ public:
   void setMouseY(int y);
   bool collision(Gameobject obj, vector<Enemy>* enemies);
   bool outOfBounds();
-  bool enemyCollision(Graphics &graphics, vector<Enemy> *enemies);
-  void handleBuff(int value, vector<Enemy>* enemies);
-  void handlePowerups();
-  void alterSpeed();
-  void nuke(vector<Enemy>* enemies);
-  void freezeEnemies();
+  void enemyCollision(Graphics &graphics, vector<Enemy> *enemies);
+
+  void handlePowerups(vector<Enemy>* enemies);
   void removeDuplicatePowerups(int value);
+
+  void giveDoubleSpeed();
+  void removeDoubleSpeed();
+
+  void nuke(vector<Enemy>* enemies);
+
+  void freezeEnemies(vector<Enemy>* enemies);
+  void unfreezeEnemies(vector<Enemy>* enemies);
 
   vector<Bullet> getBullets();
   SDL_Rect *getDoubleSpeedTimerRect();
-  SDL_Rect *getNukeTimerRect();
+  SDL_Rect *getFreezeTimerRect();
 
 private:
   int xPos, yPos, speed, health;
@@ -55,18 +60,16 @@ private:
   int lastHit = 0;
   int maxHealth;
 
-  int startedDoubleSpeed = 2000;
-  int doubleSpeedDuration = 2000;
   bool doubleSpeed = false;
 
   vector<Bullet> bullets = {};
   vector<Powerup> powerups = {};
   SDL_Rect doubleSpeedTimerRect;
-  SDL_Rect nukeTimerRect;
+  SDL_Rect freezeTimerRect;
 
   array<SDL_Rect, 2> timerRects = {{
     doubleSpeedTimerRect,
-    nukeTimerRect
+    freezeTimerRect
   }};
 
   SDL_Event event;

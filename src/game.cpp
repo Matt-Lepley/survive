@@ -159,7 +159,7 @@ void Game::gameloop() {
   generateEnemies();
 
   player.update();
-  player.handlePowerups();
+  player.handlePowerups(&enemies);
   player.draw(graphics, camera.getRect());
   for(int i = 0; i < enemies.size(); i++) {
     for(int j = 0; j < player.getBullets().size(); j++) {
@@ -171,18 +171,22 @@ void Game::gameloop() {
       }
     }
     enemies[i].update(player.getXPos(), player.getYPos(), player.getW(), player.getH());
+    for(int n = i + 1; n < enemies.size(); n++) {
+      if(abs(enemies[i].getX() - enemies[n].getX()) <= 10 &&
+         abs(enemies[i].getY() - enemies[n].getY()) <= 10) {
+          enemies[i].createSpace();
+          enemies[n].createSpace();
+      }
+    }
     enemies[i].draw(graphics, player.getXPos(), player.getYPos(), camera.getRect());
   }
 
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 255,0,0,255);
-  SDL_RenderFillRect(graphics.getRenderer(), player.getNukeTimerRect());
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 0,0,255,255);
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 255, 255);
+  SDL_RenderFillRect(graphics.getRenderer(), player.getFreezeTimerRect());
+  SDL_SetRenderDrawColor(graphics.getRenderer(), 255, 255, 0, 255);
   SDL_RenderFillRect(graphics.getRenderer(), player.getDoubleSpeedTimerRect());
 
-  if(player.enemyCollision(graphics, &enemies)) {
-      //camera.setRect(10);
-      // SHOW REDISH SCREEN
-  }
+  player.enemyCollision(graphics, &enemies);
 
   for(int i = 0; i < drops.size(); i++) {
     if(player.collision(drops[i], &enemies)) {

@@ -58,7 +58,7 @@ SDL_Rect *Player::getDoubleSpeedTimerRect() {
   return &timerRects[0];
 }
 
-SDL_Rect *Player::getNukeTimerRect() {
+SDL_Rect *Player::getFreezeTimerRect() {
   return &timerRects[1];
 }
 
@@ -103,7 +103,6 @@ bool Player::collision(Gameobject obj, vector<Enemy>* enemies) {
      tempR.x < playerRect.x + playerRect.w &&
      tempR.y + tempR.h > playerRect.y &&
      tempR.y < playerRect.y + playerRect.h) {
-      //  handleBuff(obj.getDropValue(), enemies);
 
        removeDuplicatePowerups(obj.getDropValue());
        Powerup pu;
@@ -124,52 +123,88 @@ void Player::removeDuplicatePowerups(int value) {
   }
 }
 
-void Player::handlePowerups() {
+void Player::handlePowerups(vector<Enemy>* enemies) {
   for(int i = 0; i < powerups.size(); i++) {
     if(powerups[i].timeleft() == 0) {
       powerups[i].clean();
+      if(powerups[i].getValue() == DROPS::DoubleSpeed) {
+        cout << "Removing double speed" << endl;
+        removeDoubleSpeed();
+      }
+      if(powerups[i].getValue() == DROPS::Freeze) {
+        cout << "Unfreezing Enemies" << endl;
+        unfreezeEnemies(enemies);
+      }
       powerups.erase(powerups.begin() + i);
-      timerRects[powerups[i].getValue()].w = 0;
+      int tempVal = 0;
+
+      if(powerups[i].getValue() == 2) {
+        tempVal = 1;
+      }
+
+      if(powerups[i].getValue() == 1) {
+        tempVal = 99;
+      }
+
+      if(tempVal == 0 || tempVal == 1) {
+        timerRects[tempVal].w = 0;
+      }
+
+    // If powerup is still active
     } else {
-      timerRects[powerups[i].getValue()].w = (float)powerups[i].timeleft() / (float)2000 * 100;
+      int tempVal = 0;
+
+      if(powerups[i].getValue() == 2) {
+        tempVal = 1;
+      }
+
+      if(powerups[i].getValue() == 1) {
+        tempVal = 99;
+      }
+
+      if(tempVal == 0 || tempVal == 1) {
+        timerRects[tempVal].w = (float)powerups[i].timeleft() / (float)powerups[i].getTimerDuration() * 100;
+      }
+
+      if(powerups[i].getValue() == DROPS::DoubleSpeed) {
+        giveDoubleSpeed();
+      }
+      if(powerups[i].getValue() == DROPS::Nuke) {
+        cout << "NUKEEEE" << endl;
+        nuke(enemies);
+        powerups.erase(powerups.begin() + i);
+      }
+      if(powerups[i].getValue() == DROPS::Freeze) {
+        freezeEnemies(enemies);
+      }
     }
   }
 }
 
-void Player::handleBuff(int value, vector<Enemy>* enemies) {
-  if(value == DROPS::DoubleSpeed) {
-    alterSpeed();
-  }
-  if(value == DROPS::Nuke) {
-    nuke(enemies);
-  }
-  if(value == DROPS::Freeze) {
-    freezeEnemies();
+void Player::freezeEnemies(vector<Enemy>* enemies) {
+  for(int i = 0; i < enemies->size(); i++) {
+    (*enemies)[i].setSpeed(0);
   }
 }
 
-void Player::freezeEnemies() {
-  cout << "FREEZING" << endl;
+void Player::unfreezeEnemies(vector<Enemy>* enemies) {
+  for(int i = 0; i < enemies->size(); i++) {
+    (*enemies)[i].setSpeed((*enemies)[i].getNormalSpeed());
+  }
 }
 
-// Figure out timer for speed buffs
-void Player::alterSpeed() {
-  cout << "NOT HAPPENING" << endl;
-  if(!doubleSpeed) {
-    startedDoubleSpeed = SDL_GetTicks();
-    doubleSpeed = true;
-  }
+void Player::giveDoubleSpeed() {
+  speed = baseSpeed * 2;
+}
 
-  if(doubleSpeed && startedDoubleSpeed + doubleSpeedDuration > SDL_GetTicks()) {
-    speed = baseSpeed * 2;
-  }
-
-  if(doubleSpeed && startedDoubleSpeed + doubleSpeedDuration <= SDL_GetTicks()) {
-    doubleSpeed = false;
-  }
+void Player::removeDoubleSpeed() {
+  speed = baseSpeed;
 }
 
 void Player::nuke(vector<Enemy>* enemies) {
+  for(int i = 0; i < enemies->size(); i++) {
+    (*enemies)[i].clean();
+  }
   enemies->clear();
 }
 
@@ -226,7 +261,7 @@ void Player::update() {
   }
 }
 
-bool Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
+void Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
   for(int i = 0; i < enemies->size(); i++) {
     if((*enemies)[i].getX() + (*enemies)[i].getW() >= xPos &&
        (*enemies)[i].getX() <= xPos + width &&
@@ -243,12 +278,10 @@ bool Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
          health -= 5;
          Mix_PlayChannelTimed(-1, damageFromEnemyChunk, 0, 1000);
          lastHit = 0; // Reset lastHit
-         return true;
        }
      }
   }
 
-  return false;
   // Covert angle to radians
   // float ang = angle * PI / 180;
   // int tempX, tempY;

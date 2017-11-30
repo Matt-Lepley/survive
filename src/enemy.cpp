@@ -3,7 +3,7 @@
 void Enemy::init(Graphics &graphics, int x, int y){
   xPos = x;
   yPos = y;
-  speed = 1;
+  speed = normalSpeed;
   health = 100;
 
   enemyRect = {xPos, yPos, width, height};
@@ -29,6 +29,14 @@ int Enemy::getW() {
   return width;
 }
 
+int Enemy::getNormalSpeed() {
+  return normalSpeed;
+}
+
+void Enemy::setSpeed(int s) {
+  speed = s;
+}
+
 void Enemy::update(int playerX, int playerY, int playerW, int playerH){
   if(playerX + (playerW / 2) > xPos) {
     xPos+=speed;
@@ -42,6 +50,32 @@ void Enemy::update(int playerX, int playerY, int playerW, int playerH){
   if(playerY + (playerH / 2) < yPos) {
     yPos-=speed;
   }
+
+  enemyRect.x = xPos;
+  enemyRect.y = yPos;
+}
+
+void Enemy::createSpace() {
+  random_device rd;
+  mt19937 gen(rd());
+  uniform_int_distribution<int> dis(1, 3);
+  uniform_int_distribution<int> posNeg(0, 1);
+
+  int xDif = dis(gen);
+  int yDif = dis(gen);
+  int xPosNeg = posNeg(gen);
+  int yPosNeg = posNeg(gen);
+
+  if(!xPosNeg) {
+    xDif *= -1;
+  }
+
+  if(!yPosNeg) {
+    yDif *= -1;
+  }
+
+  xPos += xDif;
+  yPos += yDif;
 
   enemyRect.x = xPos;
   enemyRect.y = yPos;
