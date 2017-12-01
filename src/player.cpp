@@ -30,6 +30,7 @@ void Player::init(Graphics &graphics) {
   SDL_FreeSurface(playerSurface);
 
   damageFromEnemyChunk = Mix_LoadWAV("damage.ogg");
+  shotChunk = Mix_LoadWAV("shot.wav");
 
   cout << "done initializing player!" << endl;
 }
@@ -76,6 +77,8 @@ void Player::shoot(int mouseX, int mouseY) {
 
   bull.init(bullX, bullY, angle);
   bullets.push_back(bull);
+
+  Mix_PlayChannelTimed(-1, shotChunk, 0, 200);
 }
 
 void Player::setMouseX(int x) {
@@ -387,5 +390,6 @@ void Player::draw(Graphics &graphics, SDL_Rect cameraRect) {
 void Player::clean() {
   SDL_DestroyTexture(playerTex);
   Mix_FreeChunk(damageFromEnemyChunk);
+  Mix_FreeChunk(shotChunk);
   cout << "Cleaned up player..." << endl;
 }

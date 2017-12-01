@@ -80,6 +80,7 @@ private:
   SDL_Texture *playerTex;
 
   Mix_Chunk *damageFromEnemyChunk = NULL;
+  Mix_Chunk *shotChunk = NULL;
 };
 
 #endif
