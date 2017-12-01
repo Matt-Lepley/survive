@@ -10,6 +10,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <array>
 #include <vector>
 #include <random>
@@ -49,11 +50,16 @@ private:
   int CURRENT_TIME, ELAPSED_TIME;
 
   bool gameIsRunning = true;
-  
+
   SDL_Event event;
   SDL_Rect screenRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+
+  // Main MENU
   SDL_Rect startGameRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 - 50, 300, 100};
   SDL_Rect quitGameRect = {SCREEN_WIDTH / 2 - 150, startGameRect.y + 150, 300, 100};
+  SDL_Texture *startTex;
+  SDL_Texture *quitTex;
+  TTF_Font *menuFont = NULL;
 
   // Objects
   Graphics graphics;

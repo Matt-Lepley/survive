@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -90,6 +90,8 @@ headers/camera.h
 SDL2/SDL.h
 -
 SDL2/SDL_image.h
+-
+SDL2/SDL_ttf.h
 -
 array
 -
