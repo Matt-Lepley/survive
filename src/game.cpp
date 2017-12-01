@@ -2,6 +2,8 @@
 
 void Game::init() {
   cout << "initializing game.." << endl;
+  TTF_Init();
+  menuFont = TTF_OpenFont("leadcoat.ttf", 80);
   populateSpawnPoints();
   graphics.init();
   camera.init();
@@ -99,6 +101,26 @@ void Game::handleEvents() {
     if(event.type == SDL_MOUSEMOTION) {
       player.setMouseX(event.button.x);
       player.setMouseY(event.button.y);
+
+      if(gamestate == GAMESTATES::StartMenu) {
+        if(event.button.x > startGameRect.x &&
+           event.button.x < startGameRect.x + startGameRect.w &&
+           event.button.y > startGameRect.y &&
+           event.button.y < startGameRect.y + startGameRect.h) {
+             startHovered = true;
+        } else {
+          startHovered = false;
+        }
+
+        if(event.button.x > quitGameRect.x &&
+           event.button.x < quitGameRect.x + quitGameRect.w &&
+           event.button.y > quitGameRect.y &&
+           event.button.y < quitGameRect.y + quitGameRect.h) {
+             quitHovered = true;
+        } else {
+          quitHovered = false;
+        }
+      }
     }
 
 		// Mouse events
@@ -135,14 +157,39 @@ void Game::startMenuLoop() {
   handleEvents();
   capFrames();  // Cap framerate before any rendering
 
+  if(startHovered) {
+    startColor = {255,0,0};
+  } else {
+    startColor = {0,0,0};
+  }
+
+  if(quitHovered) {
+    quitColor = {255,0,0};
+  } else {
+    quitColor = {0,0,0};
+  }
+
+  // Start button
+  textSurface = TTF_RenderText_Solid(menuFont, "start", startColor);
+  startTexture = SDL_CreateTextureFromSurface(graphics.getRenderer(), textSurface);
+  SDL_FreeSurface(textSurface);
+
+  SDL_QueryTexture(startTexture, NULL, NULL, &rectW, &rectH);
+  startGameRect = {(SCREEN_WIDTH / 2) - (rectW / 2), (SCREEN_HEIGHT / 2) - (rectH / 2), rectW, rectH};
+
+  // Quit button
+  textSurface = TTF_RenderText_Solid(menuFont, "quit", quitColor);
+  quitTexture = SDL_CreateTextureFromSurface(graphics.getRenderer(), textSurface);
+  SDL_FreeSurface(textSurface);
+
+  SDL_QueryTexture(quitTexture, NULL, NULL, &rectW, &rectH);
+  quitGameRect = {(SCREEN_WIDTH / 2) - (rectW / 2), (SCREEN_HEIGHT / 2) - (rectH / 2) + 100, rectW, rectH};
+
   SDL_SetRenderDrawColor(graphics.getRenderer(), 255,255,0,255);
   SDL_RenderFillRect(graphics.getRenderer(), &screenRect);
 
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 0,255,0,255);
-  SDL_RenderFillRect(graphics.getRenderer(), &startGameRect);
-
-  SDL_SetRenderDrawColor(graphics.getRenderer(), 255,0,0,255);
-  SDL_RenderFillRect(graphics.getRenderer(), &quitGameRect);
+  SDL_RenderCopy(graphics.getRenderer(), startTexture, NULL, &startGameRect);
+  SDL_RenderCopy(graphics.getRenderer(), quitTexture, NULL, &quitGameRect);
 
   SDL_RenderPresent(graphics.getRenderer());
 
@@ -216,6 +263,10 @@ void Game::clean() {
   player.clean();
   graphics.clean();
   camera.clean();
+  SDL_DestroyTexture(startTexture);
+  SDL_DestroyTexture(quitTexture);
+  TTF_CloseFont(menuFont);
+  TTF_Quit();
 }
 
 void Game::populateSpawnPoints() {

@@ -48,6 +48,7 @@ private:
 	const int MAX_FRAME_TIME = 1000 / FPS;	// Max time a frame can take
 	int LAST_UPDATE = 0;
   int CURRENT_TIME, ELAPSED_TIME;
+  int rectW, rectH;
 
   bool gameIsRunning = true;
 
@@ -55,10 +56,16 @@ private:
   SDL_Rect screenRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
   // Main MENU
-  SDL_Rect startGameRect = {SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT / 2 - 50, 300, 100};
-  SDL_Rect quitGameRect = {SCREEN_WIDTH / 2 - 150, startGameRect.y + 150, 300, 100};
-  SDL_Texture *startTex;
-  SDL_Texture *quitTex;
+  bool startHovered = false;
+  bool quitHovered = false;
+
+  SDL_Rect startGameRect;
+  SDL_Rect quitGameRect;
+  SDL_Texture *startTexture;
+  SDL_Texture *quitTexture;
+  SDL_Surface *textSurface;
+  SDL_Color startColor;
+  SDL_Color quitColor;
   TTF_Font *menuFont = NULL;
 
   // Objects
