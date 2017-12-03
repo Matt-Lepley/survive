@@ -109,6 +109,10 @@ graphics.h
 headers/graphics.h
 globals.h
 headers/globals.h
+string
+-
+array
+-
 
 headers/globals.h
 

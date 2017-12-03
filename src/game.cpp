@@ -73,7 +73,7 @@ int Game::itemDropType() {
 void Game::dropItem(Enemy enemy) {
   if(shouldDropItem()) {
     Gameobject g;
-    g.init(itemDropType(), enemy.getX(), enemy.getY());
+    g.init(itemDropType(), enemy.getX(), enemy.getY(), graphics);
     drops.push_back(g);
   }
 }
@@ -239,6 +239,7 @@ void Game::gameloop() {
       if(drops[i].getDropValue() == DROPS::Nuke) {
         camera.shake();
       }
+      drops[i].clean();
       drops.erase(drops.begin() + i);
     } else {
       drops[i].draw(graphics);  // Only draw if player hasn't picked up
