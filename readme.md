@@ -20,8 +20,17 @@
 - [X] Freeze powerup
 - [X] Powerup timings
 - [X] Powerup drop rates
-- [ ] better collision detection
-- [ ] graphics overhaul
-- [ ] Unfreeze enemies on new wave
-- [ ] Death gamestate
-- [ ] SFX for shooting
+- [X] better collision detection
+- [X] graphics overhaul
+- [X] SFX for shooting
+
+### DONE WITH ERRORS
+
+Known errors and missing features:
+
+- Existing textures not destroyed when game is exited along with any allocated memory. Assuming this is automatic, but not sure.
+- No death state
+- Poor collision detection
+- No instructions
+- Enemies remain frozen on new wave
+- No wave display

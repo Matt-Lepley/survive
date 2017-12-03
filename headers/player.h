@@ -28,6 +28,7 @@ public:
   int getYPos();
   int getW();
   int getH();
+  int getHealth();
 
   void setMouseX(int x);
   void setMouseY(int y);

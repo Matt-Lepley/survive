@@ -285,67 +285,6 @@ void Player::enemyCollision(Graphics &graphics, vector<Enemy> *enemies) {
        }
      }
   }
-
-  // Covert angle to radians
-  // float ang = angle * PI / 180;
-  // int tempX, tempY;
-  // vector<pair<int, int>> coords = {};
-  //
-  // // Center
-  // tempX = (0)*cos(ang) - (0)*sin(ang);
-  // tempY = (0)*sin(ang) + (0)*cos(ang);
-  // // Move the rotated positions relative to player
-  // tempX += xPos + (width/2);
-  // tempY += yPos + (height/2);
-  //
-  // coords.push_back(pair<int,int>(tempX, tempY));
-  //
-  // // Top right
-  // // Start at 25, -25 (assuming player is 50x50) so center is at 0,0
-  // tempX = (width/2)*cos(ang) - (-(height/2))*sin(ang);
-  // tempY = (width/2)*sin(ang) + (-(height/2))*cos(ang);
-  // // Move the rotated positions relative to player
-  // tempX += xPos + (width/2);
-  // tempY += yPos + (height/2);
-  //
-  // coords.push_back(pair<int,int>(tempX, tempY));
-  //
-  // // bottom right
-  // // Start at 25, 25 (assuming player is 50x50) so center is at 0,0
-  // tempX = (width/2)*cos(ang) - (height/2)*sin(ang);
-  // tempY = (width/2)*sin(ang) + (height/2)*cos(ang);
-  // // Move the rotated positions relative to player
-  // tempX += xPos + (width/2);
-  // tempY += yPos + (height/2);
-  //
-  // coords.push_back(pair<int,int>(tempX, tempY));
-  //
-  // // bottom left
-  // // Start at -25, 25 (assuming player is 50x50) so center is at 0,0
-  // tempX = (-(width/2))*cos(ang) - (height/2)*sin(ang);
-  // tempY = (-(width/2))*sin(ang) + (height/2)*cos(ang);
-  // // Move the rotated positions relative to player
-  // tempX += xPos + (width/2);
-  // tempY += yPos + (height/2);
-  //
-  // coords.push_back(pair<int,int>(tempX, tempY));
-  //
-  // // Top left
-  // // Start at -25, -25 (assuming player is 50x50) so center is at 0,0
-  // tempX = (-(width/2))*cos(ang) - (-(height/2))*sin(ang);
-  // tempY = (-(width/2))*sin(ang) + (-(height/2))*cos(ang);
-  // // Move the rotated positions relative to player
-  // tempX += xPos + (width/2);
-  // tempY += yPos + (height/2);
-  //
-  // coords.push_back(pair<int,int>(tempX, tempY));
-  //
-  // SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 0, 0, 255);
-  // Draw vertices rects
-  // for(int i = 0; i < coords.size(); i++) {
-  //   SDL_Rect tempR = {coords[i].first, coords[i].second, 5, 5};
-  //   SDL_RenderFillRect(graphics.getRenderer(), &tempR);
-  // }
 }
 
 void Player::draw(Graphics &graphics, SDL_Rect cameraRect) {
@@ -374,18 +313,10 @@ void Player::draw(Graphics &graphics, SDL_Rect cameraRect) {
 
   SDL_SetRenderDrawColor(graphics.getRenderer(), 0, 255, 0, 255);
   SDL_RenderFillRect(graphics.getRenderer(), &healthRect);
+}
 
-  // Draw perp rects
-  // SDL_SetRenderDrawColor(graphics.getRenderer(), 125, 255, 200, 255);
-  // for(int i = 0; i < coords.size(); i++) {
-  //   pair<int,int> p1 = coords[i];
-  //   pair<int,int> p2 = coords[i + 1 == coords.size() ? 0 : i + 1];
-  //   int tempX = p1.first - p2.first;
-  //   int tempY = p1.second - p2.second;
-  //   pair<int,int> perpEdge = {-tempY + 100, tempX + 100};
-  //   SDL_Rect tempR = {perpEdge.first, perpEdge.second, 5, 5};
-  //   SDL_RenderFillRect(graphics.getRenderer(), &tempR);
-  // }
+int Player::getHealth() {
+  return health;
 }
 
 void Player::clean() {

@@ -250,6 +250,11 @@ void Game::gameloop() {
     camera.shake();
   }
 
+  if(player.getHealth() <= 0) {
+    cout << "YOU ARE DEAD" << endl;
+    gameIsRunning = false;
+  }
+
   SDL_RenderPresent(graphics.getRenderer());
 
   // Update for framerate capping
