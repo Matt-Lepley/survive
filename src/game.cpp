@@ -145,7 +145,7 @@ void Game::handleEvents() {
         }
 
         if(gamestate == GAMESTATES::Playing) {
-          player.shoot(event.button.x, event.button.y);
+          player.shoot(event.button.x, event.button.y, graphics);
         }
 			}
 		}

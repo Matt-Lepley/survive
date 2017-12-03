@@ -36,6 +36,7 @@ void Player::init(Graphics &graphics) {
 }
 
 void Player::destroyBullet(int index) {
+  bullets[index].clean();
   bullets.erase(bullets.begin() + index);
 }
 
@@ -67,7 +68,7 @@ vector<Bullet> Player::getBullets() {
   return bullets;
 }
 
-void Player::shoot(int mouseX, int mouseY) {
+void Player::shoot(int mouseX, int mouseY, Graphics &graphics) {
   Bullet bull;
   int bullX = (xPos + width) - (width / 2);
   int bullY = (yPos + height) - (height / 2);
@@ -75,7 +76,7 @@ void Player::shoot(int mouseX, int mouseY) {
   int adjacent = mouseX  - bullX;
   float angle = atan2(opposite, adjacent) * 180 / PI;
 
-  bull.init(bullX, bullY, angle);
+  bull.init(bullX, bullY, angle, graphics);
   bullets.push_back(bull);
 
   Mix_PlayChannelTimed(-1, shotChunk, 0, 200);

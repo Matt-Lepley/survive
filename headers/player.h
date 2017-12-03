@@ -18,7 +18,7 @@ class Player {
 public:
 
   void init(Graphics &graphics);
-  void shoot(int mouseX, int mouseY);
+  void shoot(int mouseX, int mouseY, Graphics &graphics);
   void destroyBullet(int index);
   void update();
   void draw(Graphics &graphics, SDL_Rect cameraRect);
