@@ -34,3 +34,6 @@ Known errors and missing features:
 - No instructions
 - Enemies remain frozen on new wave
 - No wave display
+
+### SHORT GAMEPLAY
+![](gameplay.gif)
